@@ -33,24 +33,21 @@ let titleNewsLabel: UILabel = {
     label.textAlignment = .left
     label.adjustsFontSizeToFitWidth = true
     label.translatesAutoresizingMaskIntoConstraints = false
-    //    label.backgroundColor = .red
+     //   label.backgroundColor = .red
     return label
 }()
 
-let noteNewsText: UITextView = {
-    let text = UITextView(frame: .zero, textContainer: nil)
-    text.translatesAutoresizingMaskIntoConstraints = false
-    text.text = "11"
-    text.textColor = .black
-    text.font = UIFont.systemFont(ofSize: 14)
-    text.isSelectable = true
-    text.isEditable = false
-    text.dataDetectorTypes = UIDataDetectorTypes.link
-    text.showsVerticalScrollIndicator = false
-    text.showsHorizontalScrollIndicator = false
-     //  text.backgroundColor = .blue
-    return text
-}()
+    let noteNewslabel: UILabel = {
+        let text = UILabel()
+        text.translatesAutoresizingMaskIntoConstraints = false
+        text.text = "11"
+        text.textColor = .black
+        text.font = UIFont.systemFont(ofSize: 14)
+        text.numberOfLines = 0
+        text.lineBreakMode = .byWordWrapping
+//        text.backgroundColor = .blue
+        return text
+    }()
 
 let dataCreateNewsLabel: UILabel = {
     let label = UILabel()
@@ -78,19 +75,19 @@ let dataCreateNewsLabel: UILabel = {
         imageNews.image = news.imageNews
         imageNewsIcon.image = news.imageNewsIcon
         titleNewsLabel.text = news.titleNewsLabel
-        noteNewsText.text = news.noteNewsText
+        noteNewslabel.text = news.noteNewslabel
         dataCreateNewsLabel.text = news.dataCreateNewsLabel
     }
 }
 
 //MARK: extension
 extension RecordingNewsViewController {
-        
+    
     func setupView() {
         view.addSubview(imageNewsIcon)
         view.addSubview(imageNews)
         view.addSubview(titleNewsLabel)
-        view.addSubview(noteNewsText)
+        view.addSubview(noteNewslabel)
         view.addSubview(dataCreateNewsLabel)
     }
     
@@ -114,18 +111,18 @@ extension RecordingNewsViewController {
         ])
         
         NSLayoutConstraint.activate([
-            noteNewsText.topAnchor.constraint(equalTo: dataCreateNewsLabel.bottomAnchor, constant: 10),
-            noteNewsText.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5),
-            noteNewsText.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            noteNewsText.heightAnchor.constraint(equalToConstant: 400),
-            noteNewsText.widthAnchor.constraint(equalToConstant: 200)
+            noteNewslabel.topAnchor.constraint(equalTo: dataCreateNewsLabel.bottomAnchor, constant: 10),
+            noteNewslabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5),
+            noteNewslabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            noteNewslabel.heightAnchor.constraint(equalToConstant: 200),
+            noteNewslabel.widthAnchor.constraint(equalToConstant: 200)
         ])
         
         NSLayoutConstraint.activate([
-            imageNews.topAnchor.constraint(equalTo: noteNewsText.bottomAnchor, constant: 10),
+            imageNews.topAnchor.constraint(equalTo: noteNewslabel.bottomAnchor, constant: 10),
             imageNews.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
             imageNews.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            imageNews.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -5),
+//            imageNews.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -5),
             imageNews.heightAnchor.constraint(equalToConstant: 230),
             imageNews.widthAnchor.constraint(equalToConstant: 250)
         ])
@@ -133,7 +130,7 @@ extension RecordingNewsViewController {
         NSLayoutConstraint.activate([
             imageNewsIcon.topAnchor.constraint(equalTo: view.topAnchor, constant: 90),
             imageNewsIcon.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5),
-            imageNewsIcon.bottomAnchor.constraint(equalTo: noteNewsText.topAnchor, constant: -5),
+            imageNewsIcon.bottomAnchor.constraint(equalTo: noteNewslabel.topAnchor, constant: -5),
             imageNewsIcon.trailingAnchor.constraint(equalTo: dataCreateNewsLabel.leadingAnchor, constant: -10),
             imageNewsIcon.trailingAnchor.constraint(equalTo: titleNewsLabel.leadingAnchor, constant: -10),
             imageNewsIcon.heightAnchor.constraint(equalToConstant: 50),

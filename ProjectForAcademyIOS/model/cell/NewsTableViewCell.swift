@@ -38,17 +38,14 @@ class NewsTableViewCell: UITableViewCell {
         return label
     }()
     
-    let noteNewsText: UITextView = {
-        let text = UITextView(frame: .zero, textContainer: nil)
+    let noteNewslabel: UILabel = {
+        let text = UILabel()
         text.translatesAutoresizingMaskIntoConstraints = false
         text.text = "11"
         text.textColor = .black
         text.font = UIFont.systemFont(ofSize: 14)
-        text.isSelectable = true
-        text.isEditable = false
-        text.dataDetectorTypes = UIDataDetectorTypes.link
-        text.showsVerticalScrollIndicator = false
-        text.showsHorizontalScrollIndicator = false
+        text.numberOfLines = 0
+        text.lineBreakMode = .byWordWrapping
 //        text.backgroundColor = .blue
         return text
     }()
@@ -83,7 +80,7 @@ extension NewsTableViewCell {
         self.addSubview(imageNewsIcon)
         self.addSubview(imageNews)
         self.addSubview(titleNewsLabel)
-        self.addSubview(noteNewsText)
+        self.addSubview(noteNewslabel)
         self.addSubview(dataCreateNewsLabel)
     }
     
@@ -107,15 +104,15 @@ extension NewsTableViewCell {
         ])
         
         NSLayoutConstraint.activate([
-            noteNewsText.topAnchor.constraint(equalTo: dataCreateNewsLabel.bottomAnchor, constant: 10),
-            noteNewsText.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 5),
-            noteNewsText.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
+            noteNewslabel.topAnchor.constraint(equalTo: dataCreateNewsLabel.bottomAnchor, constant: 10),
+            noteNewslabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 5),
+            noteNewslabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
 //            noteNewsText.heightAnchor.constraint(equalToConstant: 130),
 //            noteNewsText.widthAnchor.constraint(equalToConstant: 200)
         ])
         
         NSLayoutConstraint.activate([
-            imageNews.topAnchor.constraint(equalTo: noteNewsText.bottomAnchor, constant: 10),
+            imageNews.topAnchor.constraint(equalTo: noteNewslabel.bottomAnchor, constant: 10),
             imageNews.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 5),
             imageNews.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
             imageNews.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10),
@@ -126,7 +123,7 @@ extension NewsTableViewCell {
         NSLayoutConstraint.activate([
             imageNewsIcon.topAnchor.constraint(equalTo: self.topAnchor, constant: 5),
             imageNewsIcon.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 5),
-            imageNewsIcon.bottomAnchor.constraint(equalTo: noteNewsText.topAnchor, constant: -5),
+            imageNewsIcon.bottomAnchor.constraint(equalTo: noteNewslabel.topAnchor, constant: -5),
             imageNewsIcon.trailingAnchor.constraint(equalTo: dataCreateNewsLabel.leadingAnchor, constant: -10),
             imageNewsIcon.trailingAnchor.constraint(equalTo: titleNewsLabel.leadingAnchor, constant: -10),
             imageNewsIcon.heightAnchor.constraint(equalToConstant: 50),

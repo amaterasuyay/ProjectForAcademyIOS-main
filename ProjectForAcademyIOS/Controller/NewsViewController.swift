@@ -52,7 +52,7 @@ extension NewsViewController: UITableViewDelegate, UITableViewDataSource {
         let newNews = modelRespons.news[indexPath.row]
         
         cell.titleNewsLabel.text = newNews.titleNewsLabel
-        cell.noteNewsText.text = newNews.noteNewsText
+        cell.noteNewslabel.text = newNews.noteNewslabel
         cell.dataCreateNewsLabel.text = newNews.dataCreateNewsLabel
         cell.imageNewsIcon.image = newNews.imageNewsIcon
         cell.imageNews.image = newNews.imageNews

@@ -12,5 +12,5 @@ struct ModelNews {
     var imageNewsIcon: UIImage
     var titleNewsLabel: String
     var dataCreateNewsLabel: String
-    var noteNewsText: String
+    var noteNewslabel: String
 }
