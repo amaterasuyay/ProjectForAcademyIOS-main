@@ -14,6 +14,7 @@ class RecordingNewsViewController: UIViewController{
     let imageNews: UIImageView = {
        let image = UIImageView(image: UIImage(named: "testImage"))
        image.translatesAutoresizingMaskIntoConstraints = false
+        image.contentMode = .scaleAspectFit
     return image
 }()
 

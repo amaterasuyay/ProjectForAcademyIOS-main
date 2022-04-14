@@ -48,7 +48,7 @@ class NewsTableViewCell: UITableViewCell {
         text.font = UIFont.systemFont(ofSize: 14)
         text.numberOfLines = 0
         text.lineBreakMode = .byWordWrapping
-                text.backgroundColor = .blue
+     //           text.backgroundColor = .blue
         return text
     }()
     
@@ -109,7 +109,6 @@ extension NewsTableViewCell {
             noteNewslabel.topAnchor.constraint(equalTo: dataCreateNewsLabel.bottomAnchor, constant: 10),
             noteNewslabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 5),
             noteNewslabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
-            noteNewslabel.bottomAnchor.constraint(equalTo: imageNews.topAnchor)
         ])
         
         NSLayoutConstraint.activate([
