@@ -15,6 +15,7 @@ class NewsTableViewCell: UITableViewCell {
         let imageNews: UIImageView = {
            let image = UIImageView(image: UIImage(named: "testImage"))
            image.translatesAutoresizingMaskIntoConstraints = false
+            image.contentMode = .scaleAspectFit
         return image
     }()
     
@@ -22,6 +23,7 @@ class NewsTableViewCell: UITableViewCell {
         let image = UIImageView(image: UIImage(named: "testImage"))
         image.layer.cornerRadius = 25
         image.clipsToBounds = true
+        image.contentMode = .scaleAspectFill
         image.translatesAutoresizingMaskIntoConstraints = false
      return image
  }()
@@ -46,7 +48,7 @@ class NewsTableViewCell: UITableViewCell {
         text.font = UIFont.systemFont(ofSize: 14)
         text.numberOfLines = 0
         text.lineBreakMode = .byWordWrapping
-//        text.backgroundColor = .blue
+                text.backgroundColor = .blue
         return text
     }()
     
@@ -107,8 +109,7 @@ extension NewsTableViewCell {
             noteNewslabel.topAnchor.constraint(equalTo: dataCreateNewsLabel.bottomAnchor, constant: 10),
             noteNewslabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 5),
             noteNewslabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
-//            noteNewsText.heightAnchor.constraint(equalToConstant: 130),
-//            noteNewsText.widthAnchor.constraint(equalToConstant: 200)
+            noteNewslabel.bottomAnchor.constraint(equalTo: imageNews.topAnchor)
         ])
         
         NSLayoutConstraint.activate([

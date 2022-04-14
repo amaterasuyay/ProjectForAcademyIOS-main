@@ -114,8 +114,6 @@ extension RecordingNewsViewController {
             noteNewslabel.topAnchor.constraint(equalTo: dataCreateNewsLabel.bottomAnchor, constant: 10),
             noteNewslabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5),
             noteNewslabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            noteNewslabel.heightAnchor.constraint(equalToConstant: 200),
-            noteNewslabel.widthAnchor.constraint(equalToConstant: 200)
         ])
         
         NSLayoutConstraint.activate([
