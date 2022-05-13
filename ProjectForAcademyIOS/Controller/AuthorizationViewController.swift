@@ -8,10 +8,21 @@
 import UIKit
 
 class AuthorizationViewController: UIViewController, UIViewControllerTransitioningDelegate {
-
-//MARK: Create items ot the AuthorizationViewController
     
-   private let buttonAuthorization: UIButton = {
+    //MARK: Create items ot the AuthorizationViewController
+    
+    private let buttonRegistration: UIButton = {
+        let button = UIButton()
+        button.setTitle("Зарегестрироваться", for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        button.setTitleColor(.blue, for: .normal)
+        button.layer.cornerRadius = 12
+        button.addTarget(self, action: #selector(tapButtonRegistration), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    private let buttonAuthorization: UIButton = {
         let button = UIButton()
         button.setTitle("Авторизация", for: .normal)  // Изменение название
         button.setTitleColor(.black, for: .normal)   // Изменение цвета названия
@@ -25,7 +36,7 @@ class AuthorizationViewController: UIViewController, UIViewControllerTransitioni
         return button
     }()
     
-   private let buttonExit: UIButton = {
+    private let buttonExit: UIButton = {
         let button = UIButton()
         button.setTitle("Выход", for: .normal)       // Изменение название
         button.setTitleColor(.black, for: .normal)  // Изменение цвета названия
@@ -39,7 +50,7 @@ class AuthorizationViewController: UIViewController, UIViewControllerTransitioni
         return button
     }()
     
-    private let textFieldEmail: UITextField = {
+    private let textFieldLogin: UITextField = {
         let field = UITextField()
         field.layer.cornerRadius = 8
         field.layer.borderWidth = 1
@@ -70,11 +81,11 @@ class AuthorizationViewController: UIViewController, UIViewControllerTransitioni
     
     private let labelTitleEmail: UILabel = {
         let label = UILabel()
-        label.text = "Email"
+        label.text = "Логин"
         label.textColor = .black
         label.font = UIFont.boldSystemFont(ofSize: 14)
         label.translatesAutoresizingMaskIntoConstraints = false
-       return label
+        return label
     }()
     
     private let labelTitlePassword: UILabel = {
@@ -83,11 +94,23 @@ class AuthorizationViewController: UIViewController, UIViewControllerTransitioni
         label.textColor = .black
         label.font = UIFont.boldSystemFont(ofSize: 14)
         label.translatesAutoresizingMaskIntoConstraints = false
-       return label
+        return label
     }()
     
+    //MARK: Метод поиска пользователя в массиве
     
-//MARK: viewDidLoad
+    private func findUser(login: String) -> User? {
+        let dataBase = DataBaseUserDefaults.shared.users
+        for user in dataBase {
+            if user.login == login {
+                return user
+            }
+        }
+        return nil
+    }
+    
+    
+    //MARK: viewDidLoad
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -95,25 +118,41 @@ class AuthorizationViewController: UIViewController, UIViewControllerTransitioni
         title = "Авторизация пользователя"
         setupViews()
         setConstraints()
-        }
+        
+    }
     
-//MARK: Выполнение действий селектора
+    //MARK: Выполнение действий селектора
     
     @objc func tapButtonAuthorization (){
-        let email = "admin"
-        let password = "12345"
-        if textFieldPassword.text == password && textFieldEmail.text == email {
+        let login = textFieldLogin.text ?? ""
+        let password = textFieldPassword.text ?? ""
+        let user = findUser(login: login)
+        
+        if user == nil{
+            alertNotFindUser()
+        } else if user?.password == password {
+            
             let newsViewController = UINavigationController(rootViewController: NewsViewController())
-                newsViewController.transitioningDelegate = self
-                newsViewController.modalPresentationStyle = .custom
-                 self.present(newsViewController, animated: true, completion: nil)
+            newsViewController.transitioningDelegate = self
+            newsViewController.modalPresentationStyle = .custom
+            self.present(newsViewController, animated: true, completion: nil)
+            
         } else {
             alertErrorAuthorization()
         }
     }
+    
     @objc func tabButtonExit(){
         exit(0)
     }
+    
+    @objc func tapButtonRegistration() {
+        let registrationViewController = UINavigationController(rootViewController: RegistrationViewController())
+        registrationViewController.transitioningDelegate = self
+        registrationViewController.modalPresentationStyle = .custom
+        self.present(registrationViewController, animated: true, completion: nil)
+    }
+    
 }
 
 // MARK: extension
@@ -121,9 +160,10 @@ class AuthorizationViewController: UIViewController, UIViewControllerTransitioni
 extension AuthorizationViewController {
     
     func setupViews(){
+        view.addSubview(buttonRegistration)
         view.addSubview(buttonAuthorization)
         view.addSubview(buttonExit)
-        view.addSubview(textFieldEmail)
+        view.addSubview(textFieldLogin)
         view.addSubview(textFieldPassword)
         view.addSubview(labelTitleEmail)
         view.addSubview(labelTitlePassword)
@@ -133,24 +173,31 @@ extension AuthorizationViewController {
         NSLayoutConstraint.activate([
             buttonAuthorization.widthAnchor.constraint(equalToConstant: 150),
             buttonAuthorization.heightAnchor.constraint(equalToConstant: 50),
-            buttonAuthorization.topAnchor.constraint(equalTo: view.topAnchor, constant: 500),
-            buttonAuthorization.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
-            buttonAuthorization.rightAnchor.constraint(equalTo: buttonExit.leftAnchor, constant: -60)
+            buttonAuthorization.topAnchor.constraint(equalTo: textFieldPassword.bottomAnchor, constant: 20),
+            buttonAuthorization.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            buttonAuthorization.trailingAnchor.constraint(equalTo: buttonAuthorization.leadingAnchor, constant: 60)
+        ])
+        
+        NSLayoutConstraint.activate([
+            buttonRegistration.widthAnchor.constraint(equalToConstant: 200),
+            buttonRegistration.heightAnchor.constraint(equalToConstant: 30),
+            buttonRegistration.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            buttonRegistration.centerYAnchor.constraint(equalTo: textFieldPassword.centerYAnchor, constant: 130)
         ])
         
         NSLayoutConstraint.activate([
             buttonExit.widthAnchor.constraint(equalToConstant: 150),
             buttonExit.heightAnchor.constraint(equalToConstant: 50),
-            buttonExit.topAnchor.constraint(equalTo: view.topAnchor, constant: 500),
-            buttonExit.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20),
-            buttonExit.leftAnchor.constraint(equalTo: buttonAuthorization.rightAnchor)
+            buttonExit.topAnchor.constraint(equalTo: textFieldPassword.bottomAnchor, constant: 20),
+            buttonExit.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            buttonExit.leadingAnchor.constraint(equalTo: buttonAuthorization.trailingAnchor, constant: 60)
         ])
         
         NSLayoutConstraint.activate([
-            textFieldEmail.widthAnchor.constraint(equalToConstant: 300),
-            textFieldEmail.heightAnchor.constraint(equalToConstant: 30),
-            textFieldEmail.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            textFieldEmail.centerYAnchor.constraint(equalTo: textFieldPassword.centerYAnchor, constant: -70)
+            textFieldLogin.widthAnchor.constraint(equalToConstant: 300),
+            textFieldLogin.heightAnchor.constraint(equalToConstant: 30),
+            textFieldLogin.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            textFieldLogin.centerYAnchor.constraint(equalTo: textFieldPassword.centerYAnchor, constant: -70)
         ])
         
         NSLayoutConstraint.activate([
@@ -163,7 +210,7 @@ extension AuthorizationViewController {
         NSLayoutConstraint.activate([
             labelTitleEmail.widthAnchor.constraint(equalToConstant: 90),
             labelTitleEmail.heightAnchor.constraint(equalToConstant: 30),
-            labelTitleEmail.centerYAnchor.constraint(equalTo: textFieldEmail.centerYAnchor, constant: -30),
+            labelTitleEmail.centerYAnchor.constraint(equalTo: textFieldLogin.centerYAnchor, constant: -30),
             labelTitleEmail.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 10)
         ])
         
@@ -172,7 +219,7 @@ extension AuthorizationViewController {
             labelTitlePassword.heightAnchor.constraint(equalToConstant: 30),
             labelTitlePassword.centerYAnchor.constraint(equalTo: textFieldPassword.centerYAnchor, constant: -30),
             labelTitlePassword.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 10)
-        
+            
         ])
     }
 }

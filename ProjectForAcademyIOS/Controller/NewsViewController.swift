@@ -7,17 +7,19 @@
 
 import UIKit
 
-class NewsViewController: UIViewController {
+class NewsViewController: UIViewController, UIViewControllerTransitioningDelegate {
     
     
-
     //MARK: Create item on the NewsViewController
     
-    var modelRespons = ModelRespons()
+//    var modelRespons = ModelRespons()
+    
+    private var viewModels = [CellViewModel]()
+    private var news = [Article]()
     
     let idNewsTableViewCell = "idNewsCell"
     let tableView: UITableView = {
-       let tableView = UITableView()
+        let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
@@ -31,10 +33,21 @@ class NewsViewController: UIViewController {
         
         setConstraints()
         
+        fetchTopStories()
+
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(NewsTableViewCell.self, forCellReuseIdentifier: idNewsTableViewCell)
         
+        self.navigationItem.setRightBarButtonItems([UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(tapLogout))], animated: true)
+        
+    }
+    
+    @objc func tapLogout() {
+        let authorizationViewController = UINavigationController(rootViewController: AuthorizationViewController())
+        authorizationViewController.transitioningDelegate = self
+        authorizationViewController.modalPresentationStyle = .custom
+        self.present(authorizationViewController, animated: true, completion: nil)
     }
 }
 
@@ -42,20 +55,33 @@ class NewsViewController: UIViewController {
 
 extension NewsViewController: UITableViewDelegate, UITableViewDataSource {
     
+    private func fetchTopStories() {
+        ApiManager.shared.getRequest { result in
+            switch result {
+            case .success(let articles):
+                self.viewModels = articles.compactMap({
+                    CellViewModel(imageNews: URL(string: $0.image ?? "")!,
+                                  titleNews: $0.title,
+                                  discription: $0.content ?? "No content",
+                                  dataContent: $0.publishedAt ?? "No data published")
+                })
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+                
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return modelRespons.news.count
+        return viewModels.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: idNewsTableViewCell, for: indexPath) as! NewsTableViewCell
-        
-        let newNews = modelRespons.news[indexPath.row]
-        
-        cell.titleNewsLabel.text = newNews.titleNewsLabel
-        cell.noteNewslabel.text = newNews.noteNewslabel
-        cell.dataCreateNewsLabel.text = newNews.dataCreateNewsLabel
-        cell.imageNewsIcon.image = newNews.imageNewsIcon
-        cell.imageNews.image = newNews.imageNews
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: idNewsTableViewCell, for: indexPath) as? NewsTableViewCell else {fatalError()}
+        cell.configure(with: viewModels[indexPath.row])
         
         return cell
     }
@@ -66,11 +92,12 @@ extension NewsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let newNews = modelRespons.news[indexPath.row]
+        let news = viewModels[indexPath.row]
 
         let recordingNewsVC = RecordingNewsViewController()
-        recordingNewsVC.news = newNews
+        recordingNewsVC.news = news
         self.navigationController?.pushViewController(recordingNewsVC, animated: true)
+        
     }
     
 }
@@ -89,6 +116,6 @@ extension NewsViewController {
     }
     
 }
-    
-    
+
+
 
