@@ -19,12 +19,10 @@ final class ApiManager {
         
         let task = URLSession.shared.dataTask(with: doneUrl) { data, response, error in
             
-            
             if let error = error {
                 completion(.failure(error))
             }
             else if let data = data {
-                
                 do  {
                     let result = try JSONDecoder().decode(News.self, from: data)
                     print(result)

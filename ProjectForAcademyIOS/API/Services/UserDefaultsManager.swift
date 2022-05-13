@@ -14,13 +14,11 @@ class DataBaseUserDefaults {
     enum SettingKeys: String {
         case users
         case activeUser
-        case logoutUser
     }
     
     let defaults = UserDefaults.standard
     let userKey = SettingKeys.users.rawValue
     let activeUserKey = SettingKeys.activeUser.rawValue
-    let logoutUserKey = SettingKeys.logoutUser.rawValue
     
     var users: [User] {
         get {
@@ -30,7 +28,6 @@ class DataBaseUserDefaults {
                 return [User]()
             }
         }
-        
         set {
             if let data = try? PropertyListEncoder().encode(newValue) {
                 defaults.set(data, forKey: userKey)

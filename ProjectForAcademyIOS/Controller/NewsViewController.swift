@@ -12,12 +12,10 @@ class NewsViewController: UIViewController, UIViewControllerTransitioningDelegat
     
     //MARK: Create item on the NewsViewController
     
-//    var modelRespons = ModelRespons()
-    
     private var viewModels = [CellViewModel]()
     private var news = [Article]()
+    private let idNewsTableViewCell = "idNewsCell"
     
-    let idNewsTableViewCell = "idNewsCell"
     let tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false

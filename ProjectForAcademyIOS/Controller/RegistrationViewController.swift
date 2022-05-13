@@ -92,7 +92,7 @@ class RegistrationViewController: UIViewController, UIViewControllerTransitionin
             alertEmptyText()
         }
         
-        if login.isEmpty == false && password.isEmpty == false {
+        if login.isEmpty == false && password.isEmpty == false && repeatPassword == password {
             DataBaseUserDefaults.shared.saveUser(login: login, password: password)
             alertRegSuccessful()
         } else {

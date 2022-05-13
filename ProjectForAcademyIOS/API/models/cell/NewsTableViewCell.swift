@@ -81,9 +81,7 @@ extension NewsTableViewCell {
             imageNews.image = UIImage(data: data)
         } else if let url = viewModel.imageNews {
             URLSession.shared.dataTask(with: url) { data, response, error in
-                guard let data = data, error == nil else {
-                    return
-                }
+                guard let data = data, error == nil else { return }
                 viewModel.imageData = data
                 DispatchQueue.main.async {
                     self.imageNews.image = UIImage(data: data)
