@@ -32,7 +32,7 @@ class NewsViewController: UIViewController, UIViewControllerTransitioningDelegat
         setConstraints()
         
         fetchTopStories()
-
+        
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(NewsTableViewCell.self, forCellReuseIdentifier: idNewsTableViewCell)

@@ -175,7 +175,7 @@ extension AuthorizationViewController {
             buttonAuthorization.heightAnchor.constraint(equalToConstant: 50),
             buttonAuthorization.topAnchor.constraint(equalTo: textFieldPassword.bottomAnchor, constant: 20),
             buttonAuthorization.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            buttonAuthorization.trailingAnchor.constraint(equalTo: buttonAuthorization.leadingAnchor, constant: 60)
+            buttonAuthorization.trailingAnchor.constraint(equalTo: buttonAuthorization.leadingAnchor, constant: 40)
         ])
         
         NSLayoutConstraint.activate([
@@ -190,7 +190,7 @@ extension AuthorizationViewController {
             buttonExit.heightAnchor.constraint(equalToConstant: 50),
             buttonExit.topAnchor.constraint(equalTo: textFieldPassword.bottomAnchor, constant: 20),
             buttonExit.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            buttonExit.leadingAnchor.constraint(equalTo: buttonAuthorization.trailingAnchor, constant: 60)
+            buttonExit.leadingAnchor.constraint(equalTo: buttonAuthorization.trailingAnchor, constant: 40)
         ])
         
         NSLayoutConstraint.activate([
