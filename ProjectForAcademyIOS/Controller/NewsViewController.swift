@@ -36,6 +36,8 @@ class NewsViewController: UIViewController, UIViewControllerTransitioningDelegat
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(NewsTableViewCell.self, forCellReuseIdentifier: idNewsTableViewCell)
+        
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: nil)
     }
     
 }
