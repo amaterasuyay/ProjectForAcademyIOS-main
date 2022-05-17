@@ -119,6 +119,8 @@ class AuthorizationViewController: UIViewController, UIViewControllerTransitioni
         setupViews()
         setConstraints()
         
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Log out", style: .plain, target: nil, action: nil)
+
     }
     
     //MARK: Выполнение действий селектора
@@ -132,10 +134,7 @@ class AuthorizationViewController: UIViewController, UIViewControllerTransitioni
             alertNotFindUser()
         } else if user?.password == password {
             
-            let newsViewController = UINavigationController(rootViewController: NewsViewController())
-            newsViewController.transitioningDelegate = self
-            newsViewController.modalPresentationStyle = .custom
-            self.present(newsViewController, animated: true, completion: nil)
+            navigationController?.pushViewController(NewsViewController(), animated: true)
             
         } else {
             alertErrorAuthorization()

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		007BC57D21C676189854E468 /* Pods_ProjectForAcademyIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 076437338B78192007A1746E /* Pods_ProjectForAcademyIOS.framework */; };
 		053B9CC327FDB05D007092B1 /* AuthorizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053B9CC227FDB05D007092B1 /* AuthorizationViewController.swift */; };
+		0565F9222832793A00EB902C /* MusicPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0565F9212832793A00EB902C /* MusicPlayerViewController.swift */; };
 		056C1ACF27FED513001CB9F2 /* AlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 056C1ACE27FED513001CB9F2 /* AlertController.swift */; };
 		056C1AD327FF05A1001CB9F2 /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 056C1AD227FF05A1001CB9F2 /* NewsViewController.swift */; };
 		056C1AD727FF0654001CB9F2 /* NewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 056C1AD627FF0654001CB9F2 /* NewsTableViewCell.swift */; };
@@ -16,6 +17,7 @@
 		056D928627FC8B6800DA0280 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 056D928527FC8B6800DA0280 /* SceneDelegate.swift */; };
 		056D928D27FC8B6E00DA0280 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 056D928C27FC8B6E00DA0280 /* Assets.xcassets */; };
 		056D929027FC8B6E00DA0280 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 056D928E27FC8B6E00DA0280 /* LaunchScreen.storyboard */; };
+		057A26992833756900A920CA /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057A26982833756900A920CA /* MainTabBarController.swift */; };
 		058B4B4F280436F0009A7893 /* RecordingNewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 058B4B4E280436F0009A7893 /* RecordingNewsViewController.swift */; };
 		058B4B53280456DB009A7893 /* NewsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 058B4B52280456DB009A7893 /* NewsModel.swift */; };
 		058B4B5528045AC6009A7893 /* ModelRespons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 058B4B5428045AC6009A7893 /* ModelRespons.swift */; };
@@ -40,6 +42,7 @@
 
 /* Begin PBXFileReference section */
 		053B9CC227FDB05D007092B1 /* AuthorizationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationViewController.swift; sourceTree = "<group>"; };
+		0565F9212832793A00EB902C /* MusicPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicPlayerViewController.swift; sourceTree = "<group>"; };
 		056C1ACE27FED513001CB9F2 /* AlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertController.swift; sourceTree = "<group>"; };
 		056C1AD227FF05A1001CB9F2 /* NewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViewController.swift; sourceTree = "<group>"; };
 		056C1AD627FF0654001CB9F2 /* NewsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTableViewCell.swift; sourceTree = "<group>"; };
@@ -49,6 +52,7 @@
 		056D928C27FC8B6E00DA0280 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		056D928F27FC8B6E00DA0280 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		056D929127FC8B6E00DA0280 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		057A26982833756900A920CA /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		058B4B4E280436F0009A7893 /* RecordingNewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingNewsViewController.swift; sourceTree = "<group>"; };
 		058B4B52280456DB009A7893 /* NewsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsModel.swift; sourceTree = "<group>"; };
 		058B4B5428045AC6009A7893 /* ModelRespons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelRespons.swift; sourceTree = "<group>"; };
@@ -146,6 +150,8 @@
 				116E234E2808176A0054B8F0 /* RegistrationViewController.swift */,
 				056C1AD227FF05A1001CB9F2 /* NewsViewController.swift */,
 				058B4B4E280436F0009A7893 /* RecordingNewsViewController.swift */,
+				0565F9212832793A00EB902C /* MusicPlayerViewController.swift */,
+				057A26982833756900A920CA /* MainTabBarController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -192,7 +198,6 @@
 				D031347D627E12C3C0701305 /* Pods-ProjectForAcademyIOS.debug.xcconfig */,
 				98E1EC812F18F4C285D1CDD6 /* Pods-ProjectForAcademyIOS.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -314,6 +319,8 @@
 				058B4B53280456DB009A7893 /* NewsModel.swift in Sources */,
 				053B9CC327FDB05D007092B1 /* AuthorizationViewController.swift in Sources */,
 				116E2356280863300054B8F0 /* UserDefaultsManager.swift in Sources */,
+				057A26992833756900A920CA /* MainTabBarController.swift in Sources */,
+				0565F9222832793A00EB902C /* MusicPlayerViewController.swift in Sources */,
 				056D928427FC8B6800DA0280 /* AppDelegate.swift in Sources */,
 				058B4B5528045AC6009A7893 /* ModelRespons.swift in Sources */,
 				056D928627FC8B6800DA0280 /* SceneDelegate.swift in Sources */,

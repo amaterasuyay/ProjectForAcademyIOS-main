@@ -36,17 +36,8 @@ class NewsViewController: UIViewController, UIViewControllerTransitioningDelegat
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(NewsTableViewCell.self, forCellReuseIdentifier: idNewsTableViewCell)
-        
-        self.navigationItem.setRightBarButtonItems([UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(tapLogout))], animated: true)
-        
     }
     
-    @objc func tapLogout() {
-        let authorizationViewController = UINavigationController(rootViewController: AuthorizationViewController())
-        authorizationViewController.transitioningDelegate = self
-        authorizationViewController.modalPresentationStyle = .custom
-        self.present(authorizationViewController, animated: true, completion: nil)
-    }
 }
 
 //MARK: - Extension 
