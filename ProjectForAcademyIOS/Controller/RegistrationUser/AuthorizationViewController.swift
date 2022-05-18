@@ -132,7 +132,7 @@ class AuthorizationViewController: UIViewController, UIViewControllerTransitioni
         if user == nil{
             alertNotFindUser()
         } else if user?.password == password {
-            navigationController?.pushViewController(MainTabBarController(), animated: true)
+            navigationController?.pushViewController(NewsViewController(), animated: true)
             
         } else {
             alertErrorAuthorization()
