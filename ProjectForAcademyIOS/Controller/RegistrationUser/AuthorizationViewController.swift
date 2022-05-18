@@ -120,7 +120,6 @@ class AuthorizationViewController: UIViewController, UIViewControllerTransitioni
         setConstraints()
         
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "Log out", style: .plain, target: nil, action: nil)
-
     }
     
     //MARK: Выполнение действий селектора
@@ -133,8 +132,7 @@ class AuthorizationViewController: UIViewController, UIViewControllerTransitioni
         if user == nil{
             alertNotFindUser()
         } else if user?.password == password {
-            
-            navigationController?.pushViewController(NewsViewController(), animated: true)
+            navigationController?.pushViewController(MainTabBarController(), animated: true)
             
         } else {
             alertErrorAuthorization()
@@ -146,10 +144,7 @@ class AuthorizationViewController: UIViewController, UIViewControllerTransitioni
     }
     
     @objc func tapButtonRegistration() {
-        let registrationViewController = UINavigationController(rootViewController: RegistrationViewController())
-        registrationViewController.transitioningDelegate = self
-        registrationViewController.modalPresentationStyle = .custom
-        self.present(registrationViewController, animated: true, completion: nil)
+        navigationController?.pushViewController(RegistrationViewController(), animated: true)
     }
     
 }
@@ -189,7 +184,7 @@ extension AuthorizationViewController {
             buttonExit.heightAnchor.constraint(equalToConstant: 50),
             buttonExit.topAnchor.constraint(equalTo: textFieldPassword.bottomAnchor, constant: 20),
             buttonExit.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            buttonExit.leadingAnchor.constraint(equalTo: buttonAuthorization.trailingAnchor, constant: 40)
+//            buttonExit.leadingAnchor.constraint(equalTo: buttonAuthorization.trailingAnchor, constant: 40)
         ])
         
         NSLayoutConstraint.activate([

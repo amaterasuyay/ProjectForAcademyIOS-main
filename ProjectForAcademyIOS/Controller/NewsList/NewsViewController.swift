@@ -16,7 +16,7 @@ class NewsViewController: UIViewController, UIViewControllerTransitioningDelegat
     private var news = [Article]()
     private let idNewsTableViewCell = "idNewsCell"
     
-    let tableView: UITableView = {
+    private let tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView

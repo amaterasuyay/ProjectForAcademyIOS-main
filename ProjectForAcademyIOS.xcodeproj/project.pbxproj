@@ -18,6 +18,8 @@
 		056D928D27FC8B6E00DA0280 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 056D928C27FC8B6E00DA0280 /* Assets.xcassets */; };
 		056D929027FC8B6E00DA0280 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 056D928E27FC8B6E00DA0280 /* LaunchScreen.storyboard */; };
 		057A26992833756900A920CA /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057A26982833756900A920CA /* MainTabBarController.swift */; };
+		057A269E2833C2F700A920CA /* TrackListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057A269D2833C2F700A920CA /* TrackListTableViewController.swift */; };
+		057A26A22833C80D00A920CA /* TrackListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057A26A12833C80D00A920CA /* TrackListTableViewCell.swift */; };
 		058B4B4F280436F0009A7893 /* RecordingNewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 058B4B4E280436F0009A7893 /* RecordingNewsViewController.swift */; };
 		058B4B53280456DB009A7893 /* NewsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 058B4B52280456DB009A7893 /* NewsModel.swift */; };
 		058B4B5528045AC6009A7893 /* ModelRespons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 058B4B5428045AC6009A7893 /* ModelRespons.swift */; };
@@ -53,6 +55,8 @@
 		056D928F27FC8B6E00DA0280 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		056D929127FC8B6E00DA0280 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		057A26982833756900A920CA /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		057A269D2833C2F700A920CA /* TrackListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackListTableViewController.swift; sourceTree = "<group>"; };
+		057A26A12833C80D00A920CA /* TrackListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackListTableViewCell.swift; sourceTree = "<group>"; };
 		058B4B4E280436F0009A7893 /* RecordingNewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingNewsViewController.swift; sourceTree = "<group>"; };
 		058B4B52280456DB009A7893 /* NewsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsModel.swift; sourceTree = "<group>"; };
 		058B4B5428045AC6009A7893 /* ModelRespons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelRespons.swift; sourceTree = "<group>"; };
@@ -100,6 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				056C1AD627FF0654001CB9F2 /* NewsTableViewCell.swift */,
+				057A26A12833C80D00A920CA /* TrackListTableViewCell.swift */,
 			);
 			path = cell;
 			sourceTree = "<group>";
@@ -146,11 +151,9 @@
 		056D929827FC8DEF00DA0280 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				053B9CC227FDB05D007092B1 /* AuthorizationViewController.swift */,
-				116E234E2808176A0054B8F0 /* RegistrationViewController.swift */,
-				056C1AD227FF05A1001CB9F2 /* NewsViewController.swift */,
-				058B4B4E280436F0009A7893 /* RecordingNewsViewController.swift */,
-				0565F9212832793A00EB902C /* MusicPlayerViewController.swift */,
+				057A269B2833C29600A920CA /* RegistrationUser */,
+				057A269C2833C2B900A920CA /* MusicPlayer */,
+				057A269A2833C28E00A920CA /* NewsList */,
 				057A26982833756900A920CA /* MainTabBarController.swift */,
 			);
 			path = Controller;
@@ -164,6 +167,33 @@
 				056D929127FC8B6E00DA0280 /* Info.plist */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		057A269A2833C28E00A920CA /* NewsList */ = {
+			isa = PBXGroup;
+			children = (
+				056C1AD227FF05A1001CB9F2 /* NewsViewController.swift */,
+				058B4B4E280436F0009A7893 /* RecordingNewsViewController.swift */,
+			);
+			path = NewsList;
+			sourceTree = "<group>";
+		};
+		057A269B2833C29600A920CA /* RegistrationUser */ = {
+			isa = PBXGroup;
+			children = (
+				053B9CC227FDB05D007092B1 /* AuthorizationViewController.swift */,
+				116E234E2808176A0054B8F0 /* RegistrationViewController.swift */,
+			);
+			path = RegistrationUser;
+			sourceTree = "<group>";
+		};
+		057A269C2833C2B900A920CA /* MusicPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				0565F9212832793A00EB902C /* MusicPlayerViewController.swift */,
+				057A269D2833C2F700A920CA /* TrackListTableViewController.swift */,
+			);
+			path = MusicPlayer;
 			sourceTree = "<group>";
 		};
 		116E2354280863140054B8F0 /* Services */ = {
@@ -316,6 +346,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				057A26A22833C80D00A920CA /* TrackListTableViewCell.swift in Sources */,
 				058B4B53280456DB009A7893 /* NewsModel.swift in Sources */,
 				053B9CC327FDB05D007092B1 /* AuthorizationViewController.swift in Sources */,
 				116E2356280863300054B8F0 /* UserDefaultsManager.swift in Sources */,
@@ -325,6 +356,7 @@
 				058B4B5528045AC6009A7893 /* ModelRespons.swift in Sources */,
 				056D928627FC8B6800DA0280 /* SceneDelegate.swift in Sources */,
 				116E234F2808176A0054B8F0 /* RegistrationViewController.swift in Sources */,
+				057A269E2833C2F700A920CA /* TrackListTableViewController.swift in Sources */,
 				058B4B4F280436F0009A7893 /* RecordingNewsViewController.swift in Sources */,
 				11D30AA92809684A003BBCEB /* ApiManager.swift in Sources */,
 				056C1AD727FF0654001CB9F2 /* NewsTableViewCell.swift in Sources */,

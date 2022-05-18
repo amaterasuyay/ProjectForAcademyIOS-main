@@ -80,6 +80,7 @@ class RegistrationViewController: UIViewController, UIViewControllerTransitionin
         title = "Регестрация"
         setupView()
         setConstraints()
+        navigationItem.hidesBackButton = true
     }
     
     @objc func tapButtonRegistration() {
@@ -101,10 +102,7 @@ class RegistrationViewController: UIViewController, UIViewControllerTransitionin
     }
     
     @objc func tapButtonBackAuthorization() {
-        let authorizationViewController = UINavigationController(rootViewController: AuthorizationViewController())
-        authorizationViewController.transitioningDelegate = self
-        authorizationViewController.modalPresentationStyle = .custom
-        self.present(authorizationViewController, animated: true, completion: nil)
+        navigationController?.popViewController(animated: true)
     }
     
     
