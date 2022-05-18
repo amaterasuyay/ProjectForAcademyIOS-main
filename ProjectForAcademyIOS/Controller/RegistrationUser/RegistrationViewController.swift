@@ -81,6 +81,7 @@ class RegistrationViewController: UIViewController, UIViewControllerTransitionin
         setupView()
         setConstraints()
         navigationItem.hidesBackButton = true
+        
     }
     
     @objc func tapButtonRegistration() {

@@ -119,7 +119,6 @@ class AuthorizationViewController: UIViewController, UIViewControllerTransitioni
         setupViews()
         setConstraints()
         
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Log out", style: .plain, target: nil, action: nil)
     }
     
     //MARK: Выполнение действий селектора

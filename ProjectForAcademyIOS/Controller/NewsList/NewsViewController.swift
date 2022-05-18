@@ -36,8 +36,13 @@ class NewsViewController: UIViewController, UIViewControllerTransitioningDelegat
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(NewsTableViewCell.self, forCellReuseIdentifier: idNewsTableViewCell)
-        
+        navigationItem.hidesBackButton = true
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Log out", style: .plain, target: self, action: #selector(tabBackButton))
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: nil)
+    }
+    
+    @objc func tabBackButton() {
+        navigationController?.popToRootViewController(animated: true)
     }
     
 }
