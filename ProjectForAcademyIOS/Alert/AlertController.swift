@@ -43,7 +43,7 @@ extension RegistrationViewController {
     func alertRegSuccessful() {
         let alert = UIAlertController(title: nil, message: "Регестрация прошла успешна", preferredStyle: .alert)
         let ok = UIAlertAction(title: "OK", style: .default) { Action in
-            self.navigationController?.pushViewController(NewsViewController(), animated: true)
+            self.navigationController?.pushViewController(MainTabBarController(), animated: true)
         }
         alert.addAction(ok)
         present(alert, animated: true, completion: nil)

@@ -52,7 +52,7 @@ class NewsViewController: UIViewController, UIViewControllerTransitioningDelegat
 extension NewsViewController: UITableViewDelegate, UITableViewDataSource {
     
     private func fetchTopStories() {
-        ApiManager.shared.getRequest { result in
+        ApiManager.shared.getRequestNews { result in
             switch result {
             case .success(let articles):
                 self.viewModels = articles.compactMap({
