@@ -36,7 +36,7 @@ class TrackListTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Track List"
+        title = "Музыка"
         view.backgroundColor = .systemGray4
         
         tableView.delegate = self

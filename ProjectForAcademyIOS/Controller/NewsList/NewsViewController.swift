@@ -27,7 +27,7 @@ class NewsViewController: UIViewController, UIViewControllerTransitioningDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        title = "Лента"
+        title = "Новости"
         
         setConstraints()
         

@@ -87,7 +87,7 @@ class MusicPlayerViewController: UIViewController {
     var player = AVPlayer()
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Music"
+        title = "Плеер"
         view.backgroundColor = .systemGray4
         setupView()
         setConstraints()

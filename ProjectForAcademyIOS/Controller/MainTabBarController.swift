@@ -15,8 +15,8 @@ class MainTabBarController: UITabBarController, UIViewControllerTransitioningDel
     }
     func setupTabBar() {
         
-        let newsViewController = createNavController(vc: NewsViewController(), itemName: "News", itemImage: "book.circle.fill")
-        let trackListTableViewController = createNavController(vc: TrackListTableViewController(), itemName: "Player", itemImage: "play.fill")
+        let newsViewController = createNavController(vc: NewsViewController(), itemName: "Новости", itemImage: "book.circle.fill")
+        let trackListTableViewController = createNavController(vc: TrackListTableViewController(), itemName: "Музыка", itemImage: "play.fill")
         
         viewControllers = [newsViewController, trackListTableViewController]
     }
