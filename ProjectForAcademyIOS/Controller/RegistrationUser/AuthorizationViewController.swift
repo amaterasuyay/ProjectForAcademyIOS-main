@@ -131,7 +131,14 @@ class AuthorizationViewController: UIViewController, UIViewControllerTransitioni
         if user == nil{
             alertNotFindUser()
         } else if user?.password == password {
-            navigationController?.pushViewController(MainTabBarController(), animated: true)
+            
+            let mainTabBar = MainTabBarController()
+            
+            let appDelegate = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)
+            
+            appDelegate?.window?.rootViewController = mainTabBar
+            appDelegate?.window?.makeKeyAndVisible()
+            
         } else {
             alertErrorAuthorization()
         }

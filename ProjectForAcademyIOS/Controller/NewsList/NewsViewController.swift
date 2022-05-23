@@ -42,7 +42,16 @@ class NewsViewController: UIViewController, UIViewControllerTransitioningDelegat
     }
     
     @objc func tabBackButton() {
-        navigationController?.popToRootViewController(animated: true)
+        
+        let navController = UINavigationController()
+        let authorizationViewController = AuthorizationViewController()
+        
+        navController.viewControllers = [authorizationViewController]
+        let appDelegate = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)
+        
+        appDelegate?.window?.rootViewController = navController
+        appDelegate?.window?.makeKeyAndVisible()
+        
     }
     
 }
