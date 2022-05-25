@@ -29,14 +29,14 @@ class TrackListTableViewController: UITableViewController {
         }
     }
     
-   private func setupViewModel(nameSong: String, nameAvtor: String, imageSong: String,
-                               playTrack: String) -> CellViewModelSong? {
-       let url = URL(string: imageSong)
+    private func setupViewModel(nameSong: String, nameAvtor: String, imageSong: String,
+                                playTrack: String) -> CellViewModelSong? {
+        let url = URL(string: imageSong)
         guard let doneUrl = url else { return nil }
-       
-       let urlPlayTrack = URL(string: playTrack)
-       guard let doneUrlPlayTrack = urlPlayTrack else { return nil }
-       
+        
+        let urlPlayTrack = URL(string: playTrack)
+        guard let doneUrlPlayTrack = urlPlayTrack else { return nil }
+        
         let cellviewModelSong = CellViewModelSong(nameSong: nameSong, nameAvtor: nameAvtor, imageSong: doneUrl, playTrack: doneUrlPlayTrack)
         return cellviewModelSong
     }

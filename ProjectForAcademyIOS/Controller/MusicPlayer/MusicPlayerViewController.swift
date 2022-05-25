@@ -74,11 +74,12 @@ final class MusicPlayerViewController: UIViewController {
     }()
     
     private let sliderVolumeTrack: UISlider = {
-       let slider = UISlider()
+        let slider = UISlider()
         slider.translatesAutoresizingMaskIntoConstraints = false
         slider.minimumTrackTintColor = .blue
         slider.setThumbImage(UIImage(systemName: "circle.fill"), for: .normal)
         slider.addTarget(self, action: #selector(volumeTrack), for: .valueChanged)
+        slider.value = 0.5
         return slider
     }()
     
@@ -126,7 +127,6 @@ final class MusicPlayerViewController: UIViewController {
             playerItem = AVPlayerItem(url: url)
             NotificationCenter.default.addObserver(self, selector: #selector(playerItemDidPlayToEndTime), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: playerItem)
             player.replaceCurrentItem(with: playerItem)
-            player.volume = 1.0
             sliderUpdateValue()
         }
     }
@@ -141,7 +141,7 @@ final class MusicPlayerViewController: UIViewController {
             self.trackPassedLabel.text = "\(timeMinute):\(timeSecond)"
             
             
-            let duration = CMTimeGetSeconds(self.player.currentItem!.asset.duration)
+            let duration = CMTimeGetSeconds((self.player.currentItem?.asset.duration)!)
             let minutesText = Int(duration) / 60 % 60
             let secondsText = Int(duration) % 60
             let strDuration = String(format:"%02d:%02d", minutesText, secondsText)
@@ -203,7 +203,8 @@ final class MusicPlayerViewController: UIViewController {
         
         if currentTrack != modelSong.count{
             configure(with: modelSong[currentTrack])
-            playerItem = AVPlayerItem(url: modelSong[currentTrack].playTrack!)
+            guard let url = modelSong[currentTrack].playTrack else { return }
+            playerItem = AVPlayerItem(url: url)
             player = AVPlayer(playerItem: playerItem)
             sliderUpdateValue()
             statusPlay()
@@ -211,15 +212,15 @@ final class MusicPlayerViewController: UIViewController {
     }
     
     @objc private func tapPreviousTrack() {
-        
+        player.pause()
         if currentTrack != 0 {
             currentTrack -= 1
         } else {
             currentTrack = modelSong.endIndex
         }
-        
         configure(with: modelSong[currentTrack])
-        playerItem = AVPlayerItem(url: modelSong[currentTrack].playTrack!)
+        guard let url = modelSong[currentTrack].playTrack else { return }
+        playerItem = AVPlayerItem(url: url)
         player = AVPlayer(playerItem: playerItem)
         sliderUpdateValue()
         statusPlay()

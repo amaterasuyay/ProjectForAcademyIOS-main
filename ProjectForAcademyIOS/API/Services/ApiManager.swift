@@ -83,7 +83,6 @@ final class ApiManager {
             }
             else if let data = data {
                 do {
-                    //                  print(String(decoding: data, as: UTF8.self))
                     let result = try JSONDecoder().decode(Welcome.self, from: data)
                     print(result)
                     completion(.success((result.tracks ?? [])))

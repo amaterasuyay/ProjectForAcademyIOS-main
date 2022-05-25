@@ -76,8 +76,8 @@ extension NewsViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-   private func setupViewModel(titleNews: String, imageNews: String, discription: String,
-                        dataContent: String) -> CellViewModel? {
+    private func setupViewModel(titleNews: String, imageNews: String, discription: String,
+                                dataContent: String) -> CellViewModel? {
         let url = URL(string: imageNews)
         guard let doneUrl = url else { return nil }
         let cellviewModel = CellViewModel(imageNews: doneUrl, titleNews: titleNews, discription: discription, dataContent: dataContent)
