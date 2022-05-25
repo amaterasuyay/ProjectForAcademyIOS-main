@@ -201,7 +201,12 @@ final class MusicPlayerViewController: UIViewController {
     
     @objc private func tapNextTrack() {
         player.pause()
-        if currentTrack == modelSong.count + 1 {
+        
+        if currentTrack == modelSong.endIndex {
+            currentTrack = modelSong.startIndex
+        }
+        
+        if currentTrack == modelSong.count - 1 {
             currentTrack = 0
         } else {
             currentTrack += 1
@@ -219,6 +224,11 @@ final class MusicPlayerViewController: UIViewController {
     
     @objc private func tapPreviousTrack() {
         player.pause()
+        
+        if currentTrack == modelSong.startIndex {
+            currentTrack = modelSong.endIndex
+        }
+        
         if currentTrack != 0 {
             currentTrack -= 1
         } else {
