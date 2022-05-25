@@ -7,9 +7,9 @@
 
 import UIKit
 
-class RegistrationViewController: UIViewController, UIViewControllerTransitioningDelegate {
+final class RegistrationViewController: UIViewController, UIViewControllerTransitioningDelegate {
     
-    var textFieldLogin: UITextField = {
+    private var textFieldLogin: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Введите логин"
         textField.font = UIFont.systemFont(ofSize: 14)
@@ -23,7 +23,7 @@ class RegistrationViewController: UIViewController, UIViewControllerTransitionin
         return textField
     }()
     
-    var textFieldPassword: UITextField = {
+    private var textFieldPassword: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Введите пароль"
         textField.font = UIFont.systemFont(ofSize: 14)
@@ -36,7 +36,7 @@ class RegistrationViewController: UIViewController, UIViewControllerTransitionin
         return textField
     }()
     
-    var textFieldRepeatPassword: UITextField = {
+    private var textFieldRepeatPassword: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Повторите пароль"
         textField.font = UIFont.systemFont(ofSize: 14)
@@ -50,7 +50,7 @@ class RegistrationViewController: UIViewController, UIViewControllerTransitionin
         return textField
     }()
     
-    var buttonRegistration: UIButton = {
+    private var buttonRegistration: UIButton = {
         let button = UIButton()
         button.setTitle("Регестрация", for: .normal)
         button.setTitleColor(.black, for: .normal)
@@ -63,7 +63,7 @@ class RegistrationViewController: UIViewController, UIViewControllerTransitionin
         return button
     }()
     
-    var buttonBackAuthorization: UIButton = {
+    private var buttonBackAuthorization: UIButton = {
         let button = UIButton()
         button.setTitle("У меня есть аккаунт", for: .normal)
         button.setTitleColor(.blue, for: .normal)
@@ -84,7 +84,7 @@ class RegistrationViewController: UIViewController, UIViewControllerTransitionin
         
     }
     
-    @objc func tapButtonRegistration() {
+    @objc private func tapButtonRegistration() {
         
         let login = textFieldLogin.text ?? ""
         let password = textFieldPassword.text ?? ""
@@ -102,7 +102,7 @@ class RegistrationViewController: UIViewController, UIViewControllerTransitionin
         }
     }
     
-    @objc func tapButtonBackAuthorization() {
+    @objc private func tapButtonBackAuthorization() {
         navigationController?.popViewController(animated: true)
     }
     
@@ -111,7 +111,7 @@ class RegistrationViewController: UIViewController, UIViewControllerTransitionin
 
 extension RegistrationViewController {
     
-    func setupView() {
+    private func setupView() {
         view.addSubview(textFieldLogin)
         view.addSubview(textFieldPassword)
         view.addSubview(textFieldRepeatPassword)
@@ -119,7 +119,7 @@ extension RegistrationViewController {
         view.addSubview(buttonBackAuthorization)
     }
     
-    func setConstraints() {
+    private func setConstraints() {
         NSLayoutConstraint.activate([
             textFieldLogin.widthAnchor.constraint(equalToConstant: 300),
             textFieldLogin.heightAnchor.constraint(equalToConstant: 30),

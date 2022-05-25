@@ -9,7 +9,6 @@ import UIKit
 
 class TrackListTableViewController: UITableViewController {
     
-    
     private let idTrackList = "idTrackList"
     private var viewModels = [CellViewModelSong]()
     
@@ -18,10 +17,7 @@ class TrackListTableViewController: UITableViewController {
             switch result {
             case .success(let song):
                 self.viewModels = song.compactMap({
-                    CellViewModelSong(nameSong: $0.title ?? "No title",
-                                      nameAvtor: $0.subtitle?.rawValue ?? "",
-                                      imageSong: URL(string: $0.images?.background ?? "no Image")!,
-                                      playTrack:URL(string: $0.hub?.actions?.last?.uri ?? "Nope track")!)
+                    self.setupViewModel(nameSong: $0.title ?? "", nameAvtor: $0.subtitle?.rawValue ?? "", imageSong: $0.images?.background ?? "", playTrack: $0.hub?.actions?.last?.uri ?? "")
                 })
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
@@ -33,6 +29,17 @@ class TrackListTableViewController: UITableViewController {
         }
     }
     
+   private func setupViewModel(nameSong: String, nameAvtor: String, imageSong: String,
+                               playTrack: String) -> CellViewModelSong? {
+       let url = URL(string: imageSong)
+        guard let doneUrl = url else { return nil }
+       
+       let urlPlayTrack = URL(string: playTrack)
+       guard let doneUrlPlayTrack = urlPlayTrack else { return nil }
+       
+        let cellviewModelSong = CellViewModelSong(nameSong: nameSong, nameAvtor: nameAvtor, imageSong: doneUrl, playTrack: doneUrlPlayTrack)
+        return cellviewModelSong
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,11 +70,12 @@ class TrackListTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let song = viewModels[indexPath.row]
+        let song = viewModels
+        let currentTrack = indexPath.row
         let playerVC = MusicPlayerViewController()
         playerVC.modelSong = song
+        playerVC.currentTrack = currentTrack
         navigationController?.pushViewController(playerVC, animated: true)
-        
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

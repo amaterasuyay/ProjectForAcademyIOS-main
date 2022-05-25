@@ -7,18 +7,18 @@
 
 import UIKit
 
-class DataBaseUserDefaults {
+final class DataBaseUserDefaults {
     
     static let shared = DataBaseUserDefaults()
     
-    enum SettingKeys: String {
+   private enum SettingKeys: String {
         case users
         case activeUser
     }
     
-    let defaults = UserDefaults.standard
-    let userKey = SettingKeys.users.rawValue
-    let activeUserKey = SettingKeys.activeUser.rawValue
+   private let defaults = UserDefaults.standard
+   private let userKey = SettingKeys.users.rawValue
+   private let activeUserKey = SettingKeys.activeUser.rawValue
     
     var users: [User] {
         get {

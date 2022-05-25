@@ -13,7 +13,7 @@ class CellViewModelSong {
     let nameSong: String
     let nameAvtor: String
     let playTrack: URL?
-
+    
     init(nameSong: String, nameAvtor: String, imageSong: URL, playTrack: URL) {
         self.nameSong = nameSong
         self.nameAvtor = nameAvtor

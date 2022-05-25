@@ -7,7 +7,7 @@
 
 import UIKit
 
-class NewsViewController: UIViewController, UIViewControllerTransitioningDelegate {
+final class NewsViewController: UIViewController, UIViewControllerTransitioningDelegate {
     
     
     //MARK: Create item on the NewsViewController
@@ -41,7 +41,7 @@ class NewsViewController: UIViewController, UIViewControllerTransitioningDelegat
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: nil)
     }
     
-    @objc func tabBackButton() {
+    @objc private func tabBackButton() {
         
         let navController = UINavigationController()
         let authorizationViewController = AuthorizationViewController()
@@ -53,7 +53,6 @@ class NewsViewController: UIViewController, UIViewControllerTransitioningDelegat
         appDelegate?.window?.makeKeyAndVisible()
         
     }
-    
 }
 
 //MARK: - Extension 
@@ -65,10 +64,7 @@ extension NewsViewController: UITableViewDelegate, UITableViewDataSource {
             switch result {
             case .success(let articles):
                 self.viewModels = articles.compactMap({
-                    CellViewModel(imageNews: URL(string: $0.image ?? "")!,
-                                  titleNews: $0.title,
-                                  discription: $0.content ?? "No content",
-                                  dataContent: $0.publishedAt ?? "No data published")
+                    self.setupViewModel(titleNews: $0.title , imageNews: $0.image ?? "", discription: $0.content ?? "", dataContent: $0.publishedAt ?? "")
                 })
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
@@ -79,6 +75,15 @@ extension NewsViewController: UITableViewDelegate, UITableViewDataSource {
             }
         }
     }
+    
+   private func setupViewModel(titleNews: String, imageNews: String, discription: String,
+                        dataContent: String) -> CellViewModel? {
+        let url = URL(string: imageNews)
+        guard let doneUrl = url else { return nil }
+        let cellviewModel = CellViewModel(imageNews: doneUrl, titleNews: titleNews, discription: discription, dataContent: dataContent)
+        return cellviewModel
+    }
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModels.count
@@ -98,7 +103,7 @@ extension NewsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let news = viewModels[indexPath.row]
-
+        
         let recordingNewsVC = RecordingNewsViewController()
         recordingNewsVC.news = news
         self.navigationController?.pushViewController(recordingNewsVC, animated: true)
@@ -109,7 +114,7 @@ extension NewsViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension NewsViewController {
     
-    func setConstraints(){
+    private func setConstraints(){
         view.addSubview(tableView)
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 10),

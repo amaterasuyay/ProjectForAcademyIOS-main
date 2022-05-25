@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AuthorizationViewController: UIViewController, UIViewControllerTransitioningDelegate {
+final class AuthorizationViewController: UIViewController, UIViewControllerTransitioningDelegate {
     
     //MARK: Create items ot the AuthorizationViewController
     
@@ -123,7 +123,7 @@ class AuthorizationViewController: UIViewController, UIViewControllerTransitioni
     
     //MARK: Выполнение действий селектора
     
-    @objc func tapButtonAuthorization (){
+    @objc private func tapButtonAuthorization (){
         let login = textFieldLogin.text ?? ""
         let password = textFieldPassword.text ?? ""
         let user = findUser(login: login)
@@ -144,11 +144,11 @@ class AuthorizationViewController: UIViewController, UIViewControllerTransitioni
         }
     }
     
-    @objc func tabButtonExit(){
+    @objc private func tabButtonExit(){
         exit(0)
     }
     
-    @objc func tapButtonRegistration() {
+    @objc private func tapButtonRegistration() {
         navigationController?.pushViewController(RegistrationViewController(), animated: true)
     }
     
@@ -158,7 +158,7 @@ class AuthorizationViewController: UIViewController, UIViewControllerTransitioni
 
 extension AuthorizationViewController {
     
-    func setupViews(){
+    private func setupViews(){
         view.addSubview(buttonRegistration)
         view.addSubview(buttonAuthorization)
         view.addSubview(buttonExit)
@@ -168,7 +168,7 @@ extension AuthorizationViewController {
         view.addSubview(labelTitlePassword)
     }
     
-    func setConstraints(){
+    private func setConstraints(){
         NSLayoutConstraint.activate([
             buttonAuthorization.widthAnchor.constraint(equalToConstant: 150),
             buttonAuthorization.heightAnchor.constraint(equalToConstant: 50),
@@ -189,7 +189,7 @@ extension AuthorizationViewController {
             buttonExit.heightAnchor.constraint(equalToConstant: 50),
             buttonExit.topAnchor.constraint(equalTo: textFieldPassword.bottomAnchor, constant: 20),
             buttonExit.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-//            buttonExit.leadingAnchor.constraint(equalTo: buttonAuthorization.trailingAnchor, constant: 40)
+            //            buttonExit.leadingAnchor.constraint(equalTo: buttonAuthorization.trailingAnchor, constant: 40)
         ])
         
         NSLayoutConstraint.activate([

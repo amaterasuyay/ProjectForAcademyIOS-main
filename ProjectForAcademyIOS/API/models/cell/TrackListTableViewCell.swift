@@ -7,31 +7,31 @@
 
 import UIKit
 
-class TrackListTableViewCell: UITableViewCell {
+final class TrackListTableViewCell: UITableViewCell {
     
-   private let imageTrack: UIImageView = {
+    private let imageTrack: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
         image.backgroundColor = .systemGray4
         return image
     }()
     
-   private let nameTrack: UILabel = {
+    private let nameTrack: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-       label.text = "Name track"
-       label.font = UIFont.boldSystemFont(ofSize: 14)
+        label.text = "Name track"
+        label.font = UIFont.boldSystemFont(ofSize: 14)
         return label
     }()
     
-   private let nameAvtor: UILabel = {
+    private let nameAvtor: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-       label.text = "Name Avtor"
-       label.font = UIFont.boldSystemFont(ofSize: 14)
+        label.text = "Name Avtor"
+        label.font = UIFont.boldSystemFont(ofSize: 14)
         return label
     }()
-
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupView()
@@ -64,13 +64,13 @@ extension TrackListTableViewCell {
         }
     }
     
-    func setupView() {
+    private func setupView() {
         self.addSubview(imageTrack)
         self.addSubview(nameAvtor)
         self.addSubview(nameTrack)
     }
     
-    func setConstraints() {
+    private func setConstraints() {
         NSLayoutConstraint.activate([
             imageTrack.widthAnchor.constraint(equalToConstant: 50),
             imageTrack.heightAnchor.constraint(equalToConstant: 50),

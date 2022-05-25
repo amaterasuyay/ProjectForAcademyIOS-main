@@ -7,18 +7,18 @@
 
 import UIKit
 
-class RecordingNewsViewController: UIViewController{
+final class RecordingNewsViewController: UIViewController{
     
     //MARK: Create item on the RecordingNewsViewController
     
-    let imageNews: UIImageView = {
+    private let imageNews: UIImageView = {
         let image = UIImageView(image: UIImage(named: "testImage"))
         image.translatesAutoresizingMaskIntoConstraints = false
         image.contentMode = .scaleAspectFit
         return image
     }()
     
-    let titleNewsLabel: UILabel = {
+    private let titleNewsLabel: UILabel = {
         let label = UILabel()
         label.text = "11"
         label.textColor = .black
@@ -29,7 +29,7 @@ class RecordingNewsViewController: UIViewController{
         return label
     }()
     
-    let noteNewslabel: UILabel = {
+    private let noteNewslabel: UILabel = {
         let text = UILabel()
         text.translatesAutoresizingMaskIntoConstraints = false
         text.text = "11"
@@ -40,7 +40,7 @@ class RecordingNewsViewController: UIViewController{
         return text
     }()
     
-    let dataCreateNewsLabel: UILabel = {
+    private let dataCreateNewsLabel: UILabel = {
         let label = UILabel()
         label.text = "11"
         label.textColor = .gray
@@ -53,7 +53,7 @@ class RecordingNewsViewController: UIViewController{
     
     //MARK: viewDidLoad
     
-    var news:CellViewModel!
+    var news: CellViewModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,6 +61,7 @@ class RecordingNewsViewController: UIViewController{
         title = "Запись"
         setupView()
         setConstraints()
+        guard let news = news else { return }
         
         configure(with: news)
         
@@ -70,7 +71,7 @@ class RecordingNewsViewController: UIViewController{
 //MARK: extension
 extension RecordingNewsViewController {
     
-    func configure(with viewModel: CellViewModel) {
+    private func configure(with viewModel: CellViewModel) {
         titleNewsLabel.text = viewModel.titleNews
         noteNewslabel.text = viewModel.discription
         dataCreateNewsLabel.text = viewModel.dataContent
@@ -78,26 +79,26 @@ extension RecordingNewsViewController {
         if let data = viewModel.imageData {
             imageNews.image = UIImage(data: data)
         } else if let url = viewModel.imageNews {
-            URLSession.shared.dataTask(with: url) { data, response, error in
+            URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
                 guard let data = data, error == nil else {
                     return
                 }
                 viewModel.imageData = data
                 DispatchQueue.main.async {
-                    self.imageNews.image = UIImage(data: data)
+                    self?.imageNews.image = UIImage(data: data)
                 }
             }.resume()
         }
     }
     
-    func setupView() {
+    private func setupView() {
         view.addSubview(imageNews)
         view.addSubview(titleNewsLabel)
         view.addSubview(noteNewslabel)
         view.addSubview(dataCreateNewsLabel)
     }
     
-    func setConstraints() {
+    private func setConstraints() {
         
         NSLayoutConstraint.activate([
             titleNewsLabel.topAnchor.constraint(equalTo: view.topAnchor,constant: 100),

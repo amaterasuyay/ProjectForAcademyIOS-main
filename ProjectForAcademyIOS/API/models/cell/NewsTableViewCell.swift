@@ -7,12 +7,12 @@
 
 import UIKit
 
-class NewsTableViewCell: UITableViewCell {
+final class NewsTableViewCell: UITableViewCell {
     
     
     //MARK: Create item on the NewsTableViewController (cell)
     
-    let imageNews: UIImageView = {
+    private let imageNews: UIImageView = {
         let image = UIImageView(image: UIImage(named: "testImage"))
         image.translatesAutoresizingMaskIntoConstraints = false
         image.contentMode = .scaleAspectFit
@@ -20,7 +20,7 @@ class NewsTableViewCell: UITableViewCell {
     }()
     
     
-    let titleNewsLabel: UILabel = {
+    private let titleNewsLabel: UILabel = {
         let label = UILabel()
         label.text = "11"
         label.numberOfLines = 0
@@ -32,7 +32,7 @@ class NewsTableViewCell: UITableViewCell {
         return label
     }()
     
-    let noteNewslabel: UILabel = {
+    private let noteNewslabel: UILabel = {
         let text = UILabel()
         text.translatesAutoresizingMaskIntoConstraints = false
         text.text = "11"
@@ -44,7 +44,7 @@ class NewsTableViewCell: UITableViewCell {
         return text
     }()
     
-    let dataCreateNewsLabel: UILabel = {
+    private let dataCreateNewsLabel: UILabel = {
         let label = UILabel()
         label.text = "11"
         label.textColor = .gray
@@ -90,14 +90,14 @@ extension NewsTableViewCell {
         }
     }
     
-    func setupView() {
+    private func setupView() {
         self.addSubview(imageNews)
         self.addSubview(titleNewsLabel)
         self.addSubview(noteNewslabel)
         self.addSubview(dataCreateNewsLabel)
     }
     
-    func setConstraints() {
+    private func setConstraints() {
         
         NSLayoutConstraint.activate([
             titleNewsLabel.topAnchor.constraint(equalTo: self.topAnchor,constant: 10),

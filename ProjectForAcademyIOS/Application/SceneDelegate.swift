@@ -19,7 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: windowScene)
         let navController = UINavigationController()
         let vc = AuthorizationViewController()
-
+        
         navController.viewControllers = [vc]
         window.rootViewController = navController
         window.makeKeyAndVisible()
