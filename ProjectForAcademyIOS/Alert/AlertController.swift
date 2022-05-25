@@ -53,7 +53,16 @@ extension RegistrationViewController {
         alert.addAction(ok)
         present(alert, animated: true, completion: nil)
     }
+}
+
+extension MusicPlayerViewController {
     
-    
+    func alertErrorTrack() {
+        let alert = UIAlertController(title: "Ошибка", message: "Это последний трек, вернитесь в список трек листо, и выберите трек.", preferredStyle: .alert)
+        let ok = UIAlertAction(title: "OK", style: .default, handler: nil)
+        
+        alert.addAction(ok)
+        present(alert, animated: true, completion: nil)
+    }
     
 }

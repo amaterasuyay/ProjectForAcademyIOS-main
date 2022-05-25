@@ -115,6 +115,7 @@ final class MusicPlayerViewController: UIViewController {
         super.viewDidLoad()
         title = "Плеер"
         view.backgroundColor = .systemGray4
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(tapBackBarButton))
         setupView()
         setConstraints()
         configure(with: modelSong[currentTrack])
@@ -164,6 +165,11 @@ final class MusicPlayerViewController: UIViewController {
         }
     }
     
+    @objc private func tapBackBarButton() {
+            player.pause()
+        navigationController?.pushViewController(TrackListTableViewController(), animated: true)
+    }
+    
     @objc private func volumeTrack() {
         player.volume = sliderVolumeTrack.value
     }
@@ -201,7 +207,7 @@ final class MusicPlayerViewController: UIViewController {
             currentTrack += 1
         }
         
-        if currentTrack != modelSong.count{
+        if currentTrack != modelSong.count {
             configure(with: modelSong[currentTrack])
             guard let url = modelSong[currentTrack].playTrack else { return }
             playerItem = AVPlayerItem(url: url)

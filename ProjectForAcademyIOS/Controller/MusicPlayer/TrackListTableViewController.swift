@@ -52,6 +52,7 @@ class TrackListTableViewController: UITableViewController {
         fetchTopStories()
         
         tableView.register(TrackListTableViewCell.self, forCellReuseIdentifier: idTrackList)
+        navigationItem.hidesBackButton = true
     }
     
     // MARK: - Table view data source
