@@ -109,6 +109,9 @@ final class RegistrationViewController: UIViewController, UIViewControllerTransi
         setupView()
         setConstraints()
         navigationItem.hidesBackButton = true
+        textFieldPassword.delegate = self
+        textFieldLogin.delegate = self
+        textFieldRepeatPassword.delegate = self
     }
     
     private func invalidPassword(value: String) -> String? {
@@ -149,7 +152,7 @@ final class RegistrationViewController: UIViewController, UIViewControllerTransi
     }
     
     private func constainsUpperCase(value: String) -> Bool {
-        let regularExpression = ".*[a-z]+.*"
+        let regularExpression = ".*[a-zA-Z]+.*"
         let predicate = NSPredicate(format: "SELF MATCHES %@", regularExpression)
         return !predicate.evaluate(with: value)
     }
@@ -220,10 +223,19 @@ final class RegistrationViewController: UIViewController, UIViewControllerTransi
         navigationController?.popViewController(animated: true)
     }
     
-    
 }
 
-extension RegistrationViewController {
+extension RegistrationViewController: UITextFieldDelegate {
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+    
+        if textField == textFieldLogin && textField == textFieldPassword && textField == textFieldRepeatPassword {
+            let allowedCharacters = CharacterSet(charactersIn: "qwertyuiopasdfghjklzxcvbnm1234567890QWERTYUIOPASDFGHJKLZXCVBNM" )
+            let characterSet = CharacterSet(charactersIn: string)
+            return allowedCharacters.isSuperset(of: characterSet)
+        }
+        return true
+    }
     
     private func setupView() {
         view.addSubview(textFieldLogin)
