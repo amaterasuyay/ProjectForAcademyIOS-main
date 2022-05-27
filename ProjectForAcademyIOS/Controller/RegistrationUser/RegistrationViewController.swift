@@ -76,7 +76,7 @@ final class RegistrationViewController: UIViewController, UIViewControllerTransi
     }()
     
     private let passwordError: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         label.text = "Пароль"
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 14)
@@ -85,7 +85,7 @@ final class RegistrationViewController: UIViewController, UIViewControllerTransi
     }()
     
     private let repeatPasswordError: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         label.text = "Повторить пароль"
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 14)
@@ -157,22 +157,22 @@ final class RegistrationViewController: UIViewController, UIViewControllerTransi
     @objc private func passwordChange() {
         let password = textFieldPassword.text
         let repeatPassword = textFieldRepeatPassword.text
-            if let errorMesagePassword = invalidPassword(value: password ?? "") {
-                passwordError.text = errorMesagePassword
-                passwordError.textColor = .red
-                passwordError.isHidden = false
-            } else {
-                passwordError.text = "Готово"
-                passwordError.textColor = .green
-            }
-            if let errorMesageRepeatPassword = invalidRepeatPassword(value: repeatPassword ?? "") {
-                repeatPasswordError.text = errorMesageRepeatPassword
-                repeatPasswordError.textColor = .red
-                repeatPasswordError.isHidden = false
-            } else {
-                repeatPasswordError.text = "Готово"
-                repeatPasswordError.textColor = .green
-            }
+        if let errorMesagePassword = invalidPassword(value: password ?? "") {
+            passwordError.text = errorMesagePassword
+            passwordError.textColor = .red
+            passwordError.isHidden = false
+        } else {
+            passwordError.text = "Готово"
+            passwordError.textColor = .green
+        }
+        if let errorMesageRepeatPassword = invalidRepeatPassword(value: repeatPassword ?? "") {
+            repeatPasswordError.text = errorMesageRepeatPassword
+            repeatPasswordError.textColor = .red
+            repeatPasswordError.isHidden = false
+        } else {
+            repeatPasswordError.text = "Готово"
+            repeatPasswordError.textColor = .green
+        }
         checkForValid()
     }
     
