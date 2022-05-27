@@ -240,9 +240,7 @@ final class MusicPlayerViewController: UIViewController {
         player = AVPlayer(playerItem: playerItem)
         sliderUpdateValue()
         statusPlay()
-        
     }
-    
 }
 
 //MARK: extension
@@ -282,10 +280,12 @@ extension MusicPlayerViewController {
     
     private func setConstraints() {
         NSLayoutConstraint.activate([
-            musicImage.topAnchor.constraint(equalTo: view.topAnchor, constant: 150),
+            musicImage.widthAnchor.constraint(equalToConstant: 250),
+            musicImage.heightAnchor.constraint(equalToConstant: 200),
+            musicImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
             musicImage.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
             musicImage.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
-            musicImage.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -500)
+//            musicImage.bottomAnchor.constraint(equalTo: sliderLenghtTrack.topAnchor, constant: -50)
         ])
         
         NSLayoutConstraint.activate([
@@ -332,7 +332,7 @@ extension MusicPlayerViewController {
         NSLayoutConstraint.activate([
             playButton.heightAnchor.constraint(equalToConstant: 50),
             playButton.widthAnchor.constraint(equalToConstant: 50),
-            playButton.topAnchor.constraint(equalTo: nameAuthor.bottomAnchor, constant: 60),
+            playButton.topAnchor.constraint(equalTo: nameAuthor.bottomAnchor, constant: 30),
             playButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
         
@@ -340,14 +340,14 @@ extension MusicPlayerViewController {
             nextTrack.heightAnchor.constraint(equalToConstant: 50),
             nextTrack.widthAnchor.constraint(equalToConstant: 50),
             nextTrack.leadingAnchor.constraint(equalTo: playButton.trailingAnchor, constant: 10),
-            nextTrack.topAnchor.constraint(equalTo: nameAuthor.bottomAnchor, constant: 60)
+            nextTrack.topAnchor.constraint(equalTo: nameAuthor.bottomAnchor, constant: 30)
         ])
         
         NSLayoutConstraint.activate([
             previousTrack.heightAnchor.constraint(equalToConstant: 50),
             previousTrack.widthAnchor.constraint(equalToConstant: 50),
             previousTrack.rightAnchor.constraint(equalTo: playButton.leftAnchor, constant: -10),
-            previousTrack.topAnchor.constraint(equalTo: nameAuthor.bottomAnchor, constant: 60)
+            previousTrack.topAnchor.constraint(equalTo: nameAuthor.bottomAnchor, constant: 30)
         ])
         
     }

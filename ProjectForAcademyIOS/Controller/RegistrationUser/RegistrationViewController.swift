@@ -19,6 +19,7 @@ final class RegistrationViewController: UIViewController, UIViewControllerTransi
         textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textField.frame.height))
         textField.leftViewMode = .always
         textField.autocapitalizationType = .none
+        textField.addTarget(self, action: #selector(loginChange), for: .editingChanged)
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
@@ -32,6 +33,7 @@ final class RegistrationViewController: UIViewController, UIViewControllerTransi
         textField.layer.borderColor = UIColor.blue.cgColor
         textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textField.frame.height))
         textField.leftViewMode = .always
+        textField.addTarget(self, action: #selector(passwordChange), for: .editingChanged)
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
@@ -46,6 +48,7 @@ final class RegistrationViewController: UIViewController, UIViewControllerTransi
         textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textField.frame.height))
         textField.leftViewMode = .always
         textField.isSecureTextEntry = true
+        textField.addTarget(self, action: #selector(passwordChange), for: .editingChanged)
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
@@ -72,7 +75,32 @@ final class RegistrationViewController: UIViewController, UIViewControllerTransi
         return button
     }()
     
+    private let passwordError: UILabel = {
+       let label = UILabel()
+        label.text = "Пароль"
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.systemFont(ofSize: 14)
+        label.isHidden = true
+        return label
+    }()
     
+    private let repeatPasswordError: UILabel = {
+       let label = UILabel()
+        label.text = "Повторить пароль"
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.systemFont(ofSize: 14)
+        label.isHidden = true
+        return label
+    }()
+    
+    private let loginError: UILabel = {
+        let label = UILabel()
+        label.text = ""
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.systemFont(ofSize: 14)
+        label.isHidden = false
+        return label
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -81,7 +109,71 @@ final class RegistrationViewController: UIViewController, UIViewControllerTransi
         setupView()
         setConstraints()
         navigationItem.hidesBackButton = true
-        
+    }
+    
+    private func invalidPassword(value: String) -> String? {
+        if value.count < 6 {
+            return "В пароле должно быть 6 или более цифр"
+        }
+        return nil
+    }
+    
+    private func invalidRepeatPassword(value: String) -> String? {
+        if value != textFieldPassword.text {
+            return "Пароль не совпадает"
+        }
+        return nil
+    }
+    
+    private func invalidLogin(value: String) -> String? {
+        if value.count < 3 || value.count > 16 {
+            return "Длина не может быть меньше 3 или больше 16"
+        }
+        return nil
+    }
+    
+    private func checkForValid() {
+        if passwordError.text == "Готово" && textFieldPassword.text == textFieldRepeatPassword.text && loginError.text == "Готово" {
+            buttonRegistration.isEnabled = true
+        } else {
+            buttonRegistration.isEnabled = false
+        }
+    }
+    
+    @objc private func loginChange() {
+        if let login = textFieldLogin.text {
+            if let errorMessage = invalidLogin(value: login) {
+                loginError.text = errorMessage
+                loginError.textColor = .red
+                loginError.isHidden = false
+            } else {
+                loginError.text = "Готово"
+                loginError.textColor = .green
+            }
+        }
+        checkForValid()
+    }
+    
+    @objc private func passwordChange() {
+        let password = textFieldPassword.text
+        let repeatPassword = textFieldRepeatPassword.text
+            if let errorMesagePassword = invalidPassword(value: password ?? "") {
+                passwordError.text = errorMesagePassword
+                passwordError.textColor = .red
+                passwordError.isHidden = false
+            } else {
+                passwordError.text = "Готово"
+                passwordError.textColor = .green
+            }
+            if let errorMesageRepeatPassword = invalidRepeatPassword(value: repeatPassword ?? "") {
+                repeatPasswordError.text = errorMesageRepeatPassword
+                repeatPasswordError.textColor = .red
+                repeatPasswordError.isHidden = false
+            } else {
+                repeatPasswordError.text = "Готово"
+                repeatPasswordError.textColor = .green
+            }
+        checkForValid()
     }
     
     @objc private func tapButtonRegistration() {
@@ -117,6 +209,9 @@ extension RegistrationViewController {
         view.addSubview(textFieldRepeatPassword)
         view.addSubview(buttonRegistration)
         view.addSubview(buttonBackAuthorization)
+        view.addSubview(passwordError)
+        view.addSubview(repeatPasswordError)
+        view.addSubview(loginError)
     }
     
     private func setConstraints() {
@@ -145,7 +240,7 @@ extension RegistrationViewController {
             buttonRegistration.widthAnchor.constraint(equalToConstant: 150),
             buttonRegistration.heightAnchor.constraint(equalToConstant: 50),
             buttonRegistration.centerXAnchor.constraint(equalTo: textFieldRepeatPassword.centerXAnchor),
-            buttonRegistration.centerYAnchor.constraint(equalTo: textFieldRepeatPassword.centerYAnchor, constant: 60)
+            buttonRegistration.centerYAnchor.constraint(equalTo: textFieldRepeatPassword.centerYAnchor, constant: 70)
         ])
         
         NSLayoutConstraint.activate([
@@ -153,6 +248,21 @@ extension RegistrationViewController {
             buttonBackAuthorization.heightAnchor.constraint(equalToConstant: 30),
             buttonBackAuthorization.centerXAnchor.constraint(equalTo: buttonRegistration.centerXAnchor),
             buttonBackAuthorization.centerYAnchor.constraint(equalTo: buttonRegistration.centerYAnchor, constant: 60)
+        ])
+        
+        NSLayoutConstraint.activate([
+            passwordError.topAnchor.constraint(equalTo: textFieldPassword.bottomAnchor, constant: 5),
+            passwordError.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 55),
+        ])
+        
+        NSLayoutConstraint.activate([
+            repeatPasswordError.topAnchor.constraint(equalTo: textFieldRepeatPassword.bottomAnchor, constant: 5),
+            repeatPasswordError.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 55)
+        ])
+        
+        NSLayoutConstraint.activate([
+            loginError.topAnchor.constraint(equalTo: textFieldLogin.bottomAnchor, constant: 5),
+            loginError.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 55)
         ])
         
     }

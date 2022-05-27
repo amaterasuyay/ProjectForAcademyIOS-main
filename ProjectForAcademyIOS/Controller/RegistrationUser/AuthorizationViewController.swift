@@ -56,7 +56,7 @@ final class AuthorizationViewController: UIViewController, UIViewControllerTrans
         field.layer.borderWidth = 1
         field.layer.borderColor = UIColor.blue.cgColor
         field.font = UIFont.systemFont(ofSize: 14)
-        field.placeholder = "Email"
+        field.placeholder = "Логин"
         field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: field.frame.height))  // Растояние placeholder
         field.leftViewMode = .always
         field.autocapitalizationType = .none
@@ -218,7 +218,6 @@ extension AuthorizationViewController {
             labelTitlePassword.heightAnchor.constraint(equalToConstant: 30),
             labelTitlePassword.centerYAnchor.constraint(equalTo: textFieldPassword.centerYAnchor, constant: -30),
             labelTitlePassword.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 10)
-            
         ])
     }
 }
