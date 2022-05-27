@@ -227,16 +227,6 @@ final class RegistrationViewController: UIViewController, UIViewControllerTransi
 
 extension RegistrationViewController: UITextFieldDelegate {
     
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-    
-        if textField == textFieldLogin && textField == textFieldPassword && textField == textFieldRepeatPassword {
-            let allowedCharacters = CharacterSet(charactersIn: "qwertyuiopasdfghjklzxcvbnm1234567890QWERTYUIOPASDFGHJKLZXCVBNM" )
-            let characterSet = CharacterSet(charactersIn: string)
-            return allowedCharacters.isSuperset(of: characterSet)
-        }
-        return true
-    }
-    
     private func setupView() {
         view.addSubview(textFieldLogin)
         view.addSubview(textFieldPassword)
