@@ -65,9 +65,9 @@ extension TrackListTableViewCell {
     }
     
     private func setupView() {
-        self.addSubview(imageTrack)
-        self.addSubview(nameAvtor)
-        self.addSubview(nameTrack)
+        addSubview(imageTrack)
+        addSubview(nameAvtor)
+        addSubview(nameTrack)
     }
     
     private func setConstraints() {

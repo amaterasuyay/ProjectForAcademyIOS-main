@@ -91,10 +91,10 @@ extension NewsTableViewCell {
     }
     
     private func setupView() {
-        self.addSubview(imageNews)
-        self.addSubview(titleNewsLabel)
-        self.addSubview(noteNewslabel)
-        self.addSubview(dataCreateNewsLabel)
+        addSubview(imageNews)
+        addSubview(titleNewsLabel)
+        addSubview(noteNewslabel)
+        addSubview(dataCreateNewsLabel)
     }
     
     private func setConstraints() {
