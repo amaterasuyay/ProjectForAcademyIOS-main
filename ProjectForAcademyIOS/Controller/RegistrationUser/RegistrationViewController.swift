@@ -115,6 +115,12 @@ final class RegistrationViewController: UIViewController, UIViewControllerTransi
         if value.count < 6 {
             return "В пароле должно быть 6 или более цифр"
         }
+        if constainsDigit(value: value) {
+            return "Пароль должен содержать не менее 1 цифры"
+        }
+        if constainsUpperCase(value: value) {
+            return "Пароль должен содержать не менее 1 буквы"
+        }
         return nil
     }
     
@@ -126,10 +132,26 @@ final class RegistrationViewController: UIViewController, UIViewControllerTransi
     }
     
     private func invalidLogin(value: String) -> String? {
+        let regularExpression = "[A-Z0-9a-z._%+-]{3,16}"
+        let predicate = NSPredicate(format: "SELF MATCHES %@", regularExpression)
         if value.count < 3 || value.count > 16 {
             return "Длина не может быть меньше 3 или больше 16"
+        } else if !predicate.evaluate(with: value) {
+            return "Недопустимый символ"
         }
         return nil
+    }
+    
+    private func constainsDigit(value: String) -> Bool {
+        let regularExpression = ".*[0-9]+.*"
+        let predicate = NSPredicate(format: "SELF MATCHES %@", regularExpression)
+        return !predicate.evaluate(with: value)
+    }
+    
+    private func constainsUpperCase(value: String) -> Bool {
+        let regularExpression = ".*[a-z]+.*"
+        let predicate = NSPredicate(format: "SELF MATCHES %@", regularExpression)
+        return !predicate.evaluate(with: value)
     }
     
     private func checkForValid() {
