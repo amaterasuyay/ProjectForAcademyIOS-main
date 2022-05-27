@@ -225,7 +225,23 @@ final class RegistrationViewController: UIViewController, UIViewControllerTransi
     
 }
 
+extension String {
+
+   var containsValidCharacter: Bool {
+   guard self != "" else { return true }
+   let hexSet = CharacterSet(charactersIn: "qwertyuiopasdfghjklzxcvbnm1234567890QWERTYUIOPASDFGHJKLZXCVBNM")
+   let newSet = CharacterSet(charactersIn: self)
+   return hexSet.isSuperset(of: newSet)
+
+ }
+}
+
 extension RegistrationViewController: UITextFieldDelegate {
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        return string.containsValidCharacter
+    }
     
     private func setupView() {
         view.addSubview(textFieldLogin)
@@ -292,5 +308,6 @@ extension RegistrationViewController: UITextFieldDelegate {
     }
     
 }
+
 
 
