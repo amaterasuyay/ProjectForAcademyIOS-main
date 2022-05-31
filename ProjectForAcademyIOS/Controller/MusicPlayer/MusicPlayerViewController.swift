@@ -70,6 +70,8 @@ final class MusicPlayerViewController: UIViewController {
         slider.minimumTrackTintColor = .blue
         slider.setThumbImage(UIImage(systemName: "circle.fill"), for: .normal)
         slider.addTarget(self, action: #selector(sliderLenghtComposition), for: .valueChanged)
+        slider.addTarget(self, action: #selector(touchUpInside), for: .touchUpInside)
+        slider.addTarget(self, action: #selector(touchUpOutside), for: .touchDown)
         return slider
     }()
     
@@ -109,7 +111,6 @@ final class MusicPlayerViewController: UIViewController {
     private var status = false
     private var playerItem: AVPlayerItem?
     private var player = AVPlayer()
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -165,6 +166,16 @@ final class MusicPlayerViewController: UIViewController {
         }
     }
     
+    @objc private func touchUpInside() {
+        player.play()
+        playButton.setImage(UIImage(systemName:"pause.fill"), for: .normal)
+    }
+    
+    @objc private func touchUpOutside() {
+        player.pause()
+        playButton.setImage(UIImage(systemName:"play.fill"), for: .normal)
+    }
+    
     @objc private func tapBackBarButton() {
             player.pause()
         navigationController?.pushViewController(TrackListTableViewController(), animated: true)
@@ -200,7 +211,6 @@ final class MusicPlayerViewController: UIViewController {
     }
     
     @objc private func tapNextTrack() {
-        player.pause()
         
         if currentTrack == modelSong.endIndex {
             currentTrack = modelSong.startIndex
@@ -219,11 +229,13 @@ final class MusicPlayerViewController: UIViewController {
             player = AVPlayer(playerItem: playerItem)
             sliderUpdateValue()
             statusPlay()
+            
+            player.play()
+            playButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
         }
     }
     
     @objc private func tapPreviousTrack() {
-        player.pause()
         
         if currentTrack == modelSong.startIndex {
             currentTrack = modelSong.endIndex
@@ -240,6 +252,9 @@ final class MusicPlayerViewController: UIViewController {
         player = AVPlayer(playerItem: playerItem)
         sliderUpdateValue()
         statusPlay()
+        
+        player.play()
+        playButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
     }
 }
 

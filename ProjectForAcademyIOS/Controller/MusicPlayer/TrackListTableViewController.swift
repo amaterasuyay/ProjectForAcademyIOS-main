@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TrackListTableViewController: UITableViewController {
+final class TrackListTableViewController: UITableViewController {
     
     private let idTrackList = "idTrackList"
     private var viewModels = [CellViewModelSong]()

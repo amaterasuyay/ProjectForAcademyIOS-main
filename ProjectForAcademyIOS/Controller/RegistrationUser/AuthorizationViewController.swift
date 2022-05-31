@@ -138,6 +138,7 @@ final class AuthorizationViewController: UIViewController, UIViewControllerTrans
             
             appDelegate?.window?.rootViewController = mainTabBar
             appDelegate?.window?.makeKeyAndVisible()
+            DataBaseUserDefaults.shared.setIsLoggedIn(value: true)
             
         } else {
             alertErrorAuthorization()

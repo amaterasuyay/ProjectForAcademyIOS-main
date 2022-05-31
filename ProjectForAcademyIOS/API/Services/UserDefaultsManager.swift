@@ -11,14 +11,24 @@ final class DataBaseUserDefaults {
     
     static let shared = DataBaseUserDefaults()
     
-   private enum SettingKeys: String {
+    private enum SettingKeys: String {
         case users
-        case activeUser
+        case isLoggedIn
     }
     
-   private let defaults = UserDefaults.standard
-   private let userKey = SettingKeys.users.rawValue
-   private let activeUserKey = SettingKeys.activeUser.rawValue
+    private let defaults = UserDefaults.standard
+    private let userKey = SettingKeys.users.rawValue
+    private let isLoggedInKey = SettingKeys.isLoggedIn.rawValue
+    let inLogin = UserDefaults.standard.bool(forKey: "isLoggedIn")
+    
+    func setIsLoggedIn(value: Bool) {
+        defaults.set(value, forKey: isLoggedInKey)
+        defaults.synchronize()
+    }
+    
+    func isLogged() -> Bool {
+        return defaults.bool(forKey: isLoggedInKey)
+    }
     
     var users: [User] {
         get {

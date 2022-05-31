@@ -23,6 +23,7 @@
 		057A26992833756900A920CA /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057A26982833756900A920CA /* MainTabBarController.swift */; };
 		057A269E2833C2F700A920CA /* TrackListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057A269D2833C2F700A920CA /* TrackListTableViewController.swift */; };
 		057A26A22833C80D00A920CA /* TrackListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057A26A12833C80D00A920CA /* TrackListTableViewCell.swift */; };
+		057B3A872840EB1700F5D556 /* CustomTextFieldRegistrationUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057B3A862840EB1700F5D556 /* CustomTextFieldRegistrationUser.swift */; };
 		058B4B4F280436F0009A7893 /* RecordingNewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 058B4B4E280436F0009A7893 /* RecordingNewsViewController.swift */; };
 		058B4B53280456DB009A7893 /* NewsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 058B4B52280456DB009A7893 /* NewsModel.swift */; };
 		058B4B5528045AC6009A7893 /* ModelResponsNews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 058B4B5428045AC6009A7893 /* ModelResponsNews.swift */; };
@@ -63,6 +64,7 @@
 		057A26982833756900A920CA /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		057A269D2833C2F700A920CA /* TrackListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackListTableViewController.swift; sourceTree = "<group>"; };
 		057A26A12833C80D00A920CA /* TrackListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackListTableViewCell.swift; sourceTree = "<group>"; };
+		057B3A862840EB1700F5D556 /* CustomTextFieldRegistrationUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextFieldRegistrationUser.swift; sourceTree = "<group>"; };
 		058B4B4E280436F0009A7893 /* RecordingNewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingNewsViewController.swift; sourceTree = "<group>"; };
 		058B4B52280456DB009A7893 /* NewsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsModel.swift; sourceTree = "<group>"; };
 		058B4B5428045AC6009A7893 /* ModelResponsNews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelResponsNews.swift; sourceTree = "<group>"; };
@@ -216,6 +218,7 @@
 			children = (
 				053B9CC227FDB05D007092B1 /* AuthorizationViewController.swift */,
 				116E234E2808176A0054B8F0 /* RegistrationViewController.swift */,
+				057B3A862840EB1700F5D556 /* CustomTextFieldRegistrationUser.swift */,
 			);
 			path = RegistrationUser;
 			sourceTree = "<group>";
@@ -391,6 +394,7 @@
 				056D928627FC8B6800DA0280 /* SceneDelegate.swift in Sources */,
 				116E234F2808176A0054B8F0 /* RegistrationViewController.swift in Sources */,
 				057A269E2833C2F700A920CA /* TrackListTableViewController.swift in Sources */,
+				057B3A872840EB1700F5D556 /* CustomTextFieldRegistrationUser.swift in Sources */,
 				0576A8992836335900EB4465 /* RecommendationsListModel.swift in Sources */,
 				058B4B4F280436F0009A7893 /* RecordingNewsViewController.swift in Sources */,
 				11D30AA92809684A003BBCEB /* ApiManager.swift in Sources */,

@@ -19,12 +19,25 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: windowScene)
         let navController = UINavigationController()
         let vc = AuthorizationViewController()
-        
         navController.viewControllers = [vc]
-        window.rootViewController = navController
-        window.makeKeyAndVisible()
+        
+        if isLoginUser() {
+            window.rootViewController = MainTabBarController()
+            window.makeKeyAndVisible()
+        } else {
+            window.rootViewController = navController
+            window.makeKeyAndVisible()
+        }
+        
+
+//        window.rootViewController = navController
+//        window.makeKeyAndVisible()
         
         self.window = window
+    }
+    
+    private func isLoginUser() -> Bool {
+        return DataBaseUserDefaults.shared.isLogged()
     }
     
     func sceneDidDisconnect(_ scene: UIScene) {

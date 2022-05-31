@@ -43,6 +43,8 @@ final class NewsViewController: UIViewController, UIViewControllerTransitioningD
     
     @objc private func tabBackButton() {
         
+        DataBaseUserDefaults.shared.setIsLoggedIn(value: false)
+        
         let navController = UINavigationController()
         let authorizationViewController = AuthorizationViewController()
         
