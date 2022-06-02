@@ -11,6 +11,21 @@ final class AuthorizationViewController: UIViewController, UIViewControllerTrans
     
     //MARK: Create items ot the AuthorizationViewController
     
+    private let scrollView: UIScrollView = {
+       let scrollView = UIScrollView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.backgroundColor = .white
+        scrollView.isScrollEnabled = true
+        scrollView.showsHorizontalScrollIndicator = true
+        return scrollView
+    }()
+    
+    private let contentView: UIView = {
+       let contentView = UIView()
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        return contentView
+    }()
+    
     private let buttonRegistration: UIButton = {
         let button = UIButton()
         button.setTitle("Зарегестрироваться", for: .normal)
@@ -97,6 +112,17 @@ final class AuthorizationViewController: UIViewController, UIViewControllerTrans
         return label
     }()
     
+    //MARK: viewDidLoad
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .white
+        title = "Авторизация пользователя"
+        setupViews()
+        setConstraints()
+        registerForKeyboard()
+    }
+    
     //MARK: Метод поиска пользователя в массиве
     
     private func findUser(login: String) -> User? {
@@ -108,20 +134,33 @@ final class AuthorizationViewController: UIViewController, UIViewControllerTrans
         }
         return nil
     }
-    
-    
-    //MARK: viewDidLoad
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .white
-        title = "Авторизация пользователя"
-        setupViews()
-        setConstraints()
-        
+//
+    private func registerForKeyboard() {
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(backgroundTap))
+        self.contentView.addGestureRecognizer(tapGestureRecognizer)
+
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
-    //MARK: Выполнение действий селектора
+    @objc func keyboardWillShow(notification: NSNotification) {        
+        let contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0, right: 0.0)
+        
+        scrollView.contentInset = contentInsets
+        scrollView.scrollIndicatorInsets = contentInsets
+        scrollView.isScrollEnabled = true
+    }
+
+    @objc func keyboardWillHide(notification: NSNotification) {
+        let contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
+        scrollView.contentInset = contentInsets
+        scrollView.scrollIndicatorInsets = contentInsets
+        scrollView.isScrollEnabled = false
+    }
+    
+    @objc func backgroundTap(_ sender: UITapGestureRecognizer) {
+        self.view.endEditing(true)
+    }
     
     @objc private func tapButtonAuthorization (){
         let login = textFieldLogin.text ?? ""
@@ -151,6 +190,7 @@ final class AuthorizationViewController: UIViewController, UIViewControllerTrans
     
     @objc private func tapButtonRegistration() {
         navigationController?.pushViewController(RegistrationViewController(), animated: true)
+        self.view.endEditing(true)
     }
     
 }
@@ -160,65 +200,87 @@ final class AuthorizationViewController: UIViewController, UIViewControllerTrans
 extension AuthorizationViewController {
     
     private func setupViews(){
-        view.addSubview(buttonRegistration)
-        view.addSubview(buttonAuthorization)
-        view.addSubview(buttonExit)
-        view.addSubview(textFieldLogin)
-        view.addSubview(textFieldPassword)
-        view.addSubview(labelTitleEmail)
-        view.addSubview(labelTitlePassword)
+        view.addSubview(scrollView)
+        scrollView.addSubview(contentView)
+        contentView.addSubview(labelTitleEmail)
+        contentView.addSubview(textFieldLogin)
+        contentView.addSubview(labelTitlePassword)
+        contentView.addSubview(textFieldPassword)
+        contentView.addSubview(buttonAuthorization)
+        contentView.addSubview(buttonExit)
+        contentView.addSubview(buttonRegistration)
     }
     
     private func setConstraints(){
+        
         NSLayoutConstraint.activate([
-            buttonAuthorization.widthAnchor.constraint(equalToConstant: 150),
-            buttonAuthorization.heightAnchor.constraint(equalToConstant: 50),
-            buttonAuthorization.topAnchor.constraint(equalTo: textFieldPassword.bottomAnchor, constant: 20),
-            buttonAuthorization.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            buttonAuthorization.trailingAnchor.constraint(equalTo: buttonAuthorization.leadingAnchor, constant: 40)
+            scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            scrollView.widthAnchor.constraint(equalTo: view.widthAnchor),
+            scrollView.topAnchor.constraint(equalTo: view.topAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+//            scrollView.widthAnchor.constraint(equalToConstant: 400),
+//            scrollView.heightAnchor.constraint(equalToConstant: 800)
         ])
         
         NSLayoutConstraint.activate([
-            buttonRegistration.widthAnchor.constraint(equalToConstant: 200),
-            buttonRegistration.heightAnchor.constraint(equalToConstant: 30),
-            buttonRegistration.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            buttonRegistration.centerYAnchor.constraint(equalTo: textFieldPassword.centerYAnchor, constant: 130)
-        ])
-        
-        NSLayoutConstraint.activate([
-            buttonExit.widthAnchor.constraint(equalToConstant: 150),
-            buttonExit.heightAnchor.constraint(equalToConstant: 50),
-            buttonExit.topAnchor.constraint(equalTo: textFieldPassword.bottomAnchor, constant: 20),
-            buttonExit.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            //            buttonExit.leadingAnchor.constraint(equalTo: buttonAuthorization.trailingAnchor, constant: 40)
-        ])
-        
-        NSLayoutConstraint.activate([
-            textFieldLogin.widthAnchor.constraint(equalToConstant: 300),
-            textFieldLogin.heightAnchor.constraint(equalToConstant: 30),
-            textFieldLogin.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            textFieldLogin.centerYAnchor.constraint(equalTo: textFieldPassword.centerYAnchor, constant: -70)
-        ])
-        
-        NSLayoutConstraint.activate([
-            textFieldPassword.widthAnchor.constraint(equalToConstant: 300),
-            textFieldPassword.heightAnchor.constraint(equalToConstant: 30),
-            textFieldPassword.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            textFieldPassword.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+            contentView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width),
+            contentView.heightAnchor.constraint(equalToConstant: 580),
+            contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor)
         ])
         
         NSLayoutConstraint.activate([
             labelTitleEmail.widthAnchor.constraint(equalToConstant: 90),
             labelTitleEmail.heightAnchor.constraint(equalToConstant: 30),
-            labelTitleEmail.centerYAnchor.constraint(equalTo: textFieldLogin.centerYAnchor, constant: -30),
-            labelTitleEmail.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 10)
+            labelTitleEmail.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: -140),
+            labelTitleEmail.centerXAnchor.constraint(equalTo: contentView.centerXAnchor, constant: 10)
+        ])
+        
+        NSLayoutConstraint.activate([
+            textFieldLogin.widthAnchor.constraint(equalToConstant: 300),
+            textFieldLogin.heightAnchor.constraint(equalToConstant: 30),
+            textFieldLogin.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            textFieldLogin.centerYAnchor.constraint(equalTo: labelTitleEmail.centerYAnchor, constant: 30)
         ])
         
         NSLayoutConstraint.activate([
             labelTitlePassword.widthAnchor.constraint(equalToConstant: 90),
             labelTitlePassword.heightAnchor.constraint(equalToConstant: 30),
-            labelTitlePassword.centerYAnchor.constraint(equalTo: textFieldPassword.centerYAnchor, constant: -30),
-            labelTitlePassword.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 10)
+            labelTitlePassword.centerYAnchor.constraint(equalTo: textFieldLogin.centerYAnchor, constant: 30),
+            labelTitlePassword.centerXAnchor.constraint(equalTo: contentView .centerXAnchor, constant: 10)
+        ])
+        
+        NSLayoutConstraint.activate([
+            textFieldPassword.widthAnchor.constraint(equalToConstant: 300),
+            textFieldPassword.heightAnchor.constraint(equalToConstant: 30),
+            textFieldPassword.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            textFieldPassword.centerYAnchor.constraint(equalTo: labelTitlePassword.centerYAnchor, constant: 30)
+        ])
+        
+        NSLayoutConstraint.activate([
+            buttonAuthorization.widthAnchor.constraint(equalToConstant: 150),
+            buttonAuthorization.heightAnchor.constraint(equalToConstant: 35),
+            buttonAuthorization.topAnchor.constraint(equalTo: textFieldPassword.bottomAnchor, constant: 25),
+//            buttonAuthorization.bottomAnchor.constraint(equalTo: buttonRegistration.topAnchor, constant: -20),
+            buttonAuthorization.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+//            buttonAuthorization.trailingAnchor.constraint(equalTo: buttonExit.leadingAnchor, constant: -50)
+        ])
+        
+        NSLayoutConstraint.activate([
+            buttonExit.widthAnchor.constraint(equalToConstant: 150),
+            buttonExit.heightAnchor.constraint(equalToConstant: 35),
+            buttonExit.topAnchor.constraint(equalTo: textFieldPassword.bottomAnchor, constant: 25),
+            buttonExit.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            buttonExit.leadingAnchor.constraint(equalTo: buttonAuthorization.leadingAnchor, constant: 190)
+        ])
+        
+        NSLayoutConstraint.activate([
+            buttonRegistration.centerXAnchor.constraint(equalTo: textFieldPassword.centerXAnchor),
+            buttonRegistration.topAnchor.constraint(equalTo: buttonExit.bottomAnchor, constant: 10)
         ])
     }
 }

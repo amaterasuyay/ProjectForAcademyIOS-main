@@ -9,6 +9,21 @@ import UIKit
 
 final class RegistrationViewController: UIViewController, UIViewControllerTransitioningDelegate {
     
+    private let scrollView: UIScrollView = {
+       let scrollView = UIScrollView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.backgroundColor = .white
+        scrollView.isScrollEnabled = false
+        scrollView.alwaysBounceVertical = true
+        return scrollView
+    }()
+    
+    private let contentView: UIView = {
+       let contentView = UIView()
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        return contentView
+    }()
+    
     private var textFieldLogin: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Введите логин"
@@ -79,7 +94,7 @@ final class RegistrationViewController: UIViewController, UIViewControllerTransi
         let label = UILabel()
         label.text = "Пароль"
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 14)
+        label.font = UIFont.systemFont(ofSize: 12)
         label.isHidden = true
         return label
     }()
@@ -88,7 +103,7 @@ final class RegistrationViewController: UIViewController, UIViewControllerTransi
         let label = UILabel()
         label.text = "Повторить пароль"
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 14)
+        label.font = UIFont.systemFont(ofSize: 12)
         label.isHidden = true
         return label
     }()
@@ -97,7 +112,7 @@ final class RegistrationViewController: UIViewController, UIViewControllerTransi
         let label = UILabel()
         label.text = ""
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 14)
+        label.font = UIFont.systemFont(ofSize: 12)
         label.isHidden = false
         return label
     }()
@@ -112,6 +127,7 @@ final class RegistrationViewController: UIViewController, UIViewControllerTransi
         textFieldPassword.delegate = self
         textFieldLogin.delegate = self
         textFieldRepeatPassword.delegate = self
+        registerForKeyboard()
     }
     
     private func invalidPassword(value: String) -> String? {
@@ -163,6 +179,33 @@ final class RegistrationViewController: UIViewController, UIViewControllerTransi
         } else {
             buttonRegistration.isEnabled = false
         }
+    }
+    
+    private func registerForKeyboard() {
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(backgroundTap))
+        self.contentView.addGestureRecognizer(tapGestureRecognizer)
+
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        let contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 26 , right: 0.0)
+        
+        scrollView.contentInset = contentInsets
+        scrollView.scrollIndicatorInsets = contentInsets
+        scrollView.isScrollEnabled = true
+    }
+
+    @objc func keyboardWillHide(notification: NSNotification) {
+        let contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
+        scrollView.contentInset = contentInsets
+        scrollView.scrollIndicatorInsets = contentInsets
+        scrollView.isScrollEnabled = false
+    }
+    
+    @objc func backgroundTap(_ sender: UITapGestureRecognizer) {
+        self.view.endEditing(true)
     }
     
     @objc private func loginChange() {
@@ -244,22 +287,43 @@ extension RegistrationViewController: UITextFieldDelegate {
     }
     
     private func setupView() {
-        view.addSubview(textFieldLogin)
-        view.addSubview(textFieldPassword)
-        view.addSubview(textFieldRepeatPassword)
-        view.addSubview(buttonRegistration)
-        view.addSubview(buttonBackAuthorization)
-        view.addSubview(passwordError)
-        view.addSubview(repeatPasswordError)
-        view.addSubview(loginError)
+        view.addSubview(scrollView)
+        scrollView.addSubview(contentView)
+        contentView.addSubview(textFieldLogin)
+        contentView.addSubview(textFieldPassword)
+        contentView.addSubview(textFieldRepeatPassword)
+        contentView.addSubview(buttonRegistration)
+        contentView.addSubview(buttonBackAuthorization)
+        contentView.addSubview(passwordError)
+        contentView.addSubview(repeatPasswordError)
+        contentView.addSubview(loginError)
     }
     
     private func setConstraints() {
+        
+        NSLayoutConstraint.activate([
+            scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            scrollView.widthAnchor.constraint(equalTo: view.widthAnchor),
+            scrollView.topAnchor.constraint(equalTo: view.topAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
+        
+        NSLayoutConstraint.activate([
+            contentView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width),
+            contentView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height),
+            contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor)
+        ])
+        
         NSLayoutConstraint.activate([
             textFieldLogin.widthAnchor.constraint(equalToConstant: 300),
             textFieldLogin.heightAnchor.constraint(equalToConstant: 30),
-            textFieldLogin.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -120),
-            textFieldLogin.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            textFieldLogin.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: -190),
+            textFieldLogin.centerXAnchor.constraint(equalTo: contentView.centerXAnchor)
         ])
         
         NSLayoutConstraint.activate([
@@ -292,17 +356,17 @@ extension RegistrationViewController: UITextFieldDelegate {
         
         NSLayoutConstraint.activate([
             passwordError.topAnchor.constraint(equalTo: textFieldPassword.bottomAnchor, constant: 5),
-            passwordError.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 55),
+            passwordError.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 25),
         ])
         
         NSLayoutConstraint.activate([
             repeatPasswordError.topAnchor.constraint(equalTo: textFieldRepeatPassword.bottomAnchor, constant: 5),
-            repeatPasswordError.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 55)
+            repeatPasswordError.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 25)
         ])
         
         NSLayoutConstraint.activate([
             loginError.topAnchor.constraint(equalTo: textFieldLogin.bottomAnchor, constant: 5),
-            loginError.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 55)
+            loginError.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 25)
         ])
         
     }
